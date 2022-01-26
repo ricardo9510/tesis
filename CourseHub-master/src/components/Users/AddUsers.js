@@ -21,6 +21,9 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
+import db from "../../firebase/firebaseConfig";
+import { collection, addDoc } from "firebase/firestore";
+
 import {
   Box,
   Button,
@@ -60,6 +63,27 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const onSubmit = async (e) => {
+  e.preventDefault();
+
+  try {
+    await addDoc(collection(db,'usuarios'),{
+      username: 'probando',
+      correo: 'probando@gmail.com',
+      password: '1234abc',
+      tipoCuenta: 'alumno',
+      nombre: 'probando probando',
+      celular: '0983746810'
+    });
+  } catch (error) {
+    console.log('Hubo un error al crear el usuario');
+    console.log(error);
+  }
+  //cambiarNombre('');//borrar imput
+  //cambiarCorreo('');//borrar imput
+}
+
+//esto hace tal cosa y debrias cambiar aqui
 const FormikField = ({ label, name, type = "text", disabled }) => {
   return (
     <Box my={1}>
@@ -90,7 +114,7 @@ const FormikPassword = ({ label, ...props }) => {
           <InputAdornment position="end">
             <IconButton
               style={{ padding: 0 }}
-              onClick={() => setShowPassword(!showPassword)}
+              onClick={(event) => onSubmit(event)}
               onMouseDown={(event) => event.preventDefault()}
             >
               {showPassword ? <Visibility /> : <VisibilityOff />}
