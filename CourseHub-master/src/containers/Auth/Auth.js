@@ -144,6 +144,7 @@ const CustomInput = ({ label, ...props }) => {
   );
 };
 
+//Función del login
 export const Auth = (props) => {
   const classes = useStyles();
   const { error, success } = props;
@@ -162,7 +163,7 @@ export const Auth = (props) => {
       .min(3, "Password must be at least 3 characters")
       .required("Password is required"),
   });
-
+  //Aquí queman un grupo, el GP08
   if (isSignUp) {
     initialValues = {
       username: "",
@@ -207,6 +208,7 @@ export const Auth = (props) => {
     onMessageReset();
   }, [error, success, enqueueSnackbar, onMessageReset]);
 
+  //Función del submit para iniciar sesión, es la función onAuth()
   const onSubmit = (values, { setSubmitting }) => {
     onAuth(values, history, isSignUp);
     setSubmitting(false);
@@ -316,6 +318,7 @@ const mapStateToProps = (state) => {
   };
 };
 
+// Aquí usa redux, aquí es donde manda a loguearse a los actions
 const mapDispatchToProps = (dispatch) => {
   return {
     onAuth: (values, history, isSignUp) =>
