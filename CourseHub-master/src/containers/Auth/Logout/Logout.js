@@ -12,6 +12,7 @@ export const Logout = ({ onLogout }) => {
   return <Redirect to="/" />;
 };
 
+//Función para salirse de la sesión, aquí está igual redux en donde dice actions.logout
 const mapDispatchToProps = (dispatch) => {
   return {
     onLogout: () => dispatch(actions.logout()),
