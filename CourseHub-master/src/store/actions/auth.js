@@ -22,6 +22,7 @@ export const authFail = (error) => {
   };
 };
 
+//Función que realiza un axios para loguearse
 export const auth = (values, history, isSignUp) => {
   return (dispatch) => {
     dispatch(authStart());
