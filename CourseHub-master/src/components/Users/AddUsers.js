@@ -22,7 +22,7 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 import db from "../../firebase/firebaseConfig";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, onSnapshot } from "firebase/firestore";
 
 import {
   Box,
@@ -63,27 +63,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const onSubmit = async (e) => {
-  e.preventDefault();
 
-  try {
-    await addDoc(collection(db,'usuarios'),{
-      username: 'probando',
-      correo: 'probando@gmail.com',
-      password: '1234abc',
-      tipoCuenta: 'alumno',
-      nombre: 'probando probando',
-      celular: '0983746810'
-    });
-  } catch (error) {
-    console.log('Hubo un error al crear el usuario');
-    console.log(error);
-  }
-  //cambiarNombre('');//borrar imput
-  //cambiarCorreo('');//borrar imput
-}
-
-//esto hace tal cosa y debrias cambiar aqui
 const FormikField = ({ label, name, type = "text", disabled }) => {
   return (
     <Box my={1}>
@@ -114,7 +94,7 @@ const FormikPassword = ({ label, ...props }) => {
           <InputAdornment position="end">
             <IconButton
               style={{ padding: 0 }}
-              onClick={(event) => onSubmit(event)}
+              onClick={() => setShowPassword(!showPassword)}
               onMouseDown={(event) => event.preventDefault()}
             >
               {showPassword ? <Visibility /> : <VisibilityOff />}
@@ -231,25 +211,50 @@ export const AddUsers = (props) => {
 
   let validationSchema = Yup.object().shape({
     username: Yup.string()
-      .min(3, "Username must be at least 3 characters")
-      .max(15, "Username must be 15 characters or less")
-      .required("Must enter a username"),
+      .min(3, "El nombre de usuario debe tener al menos 3 caracteres")
+      .max(15, "El nombre de usuario debe tener 15 caracteres o menos")
+      .required("Debe ingresar nombre de usuario"),
     password: Yup.string()
-      .min(3, "Password must be at least 3 characters")
-      .required("Password is required"),
+      .min(3, "La contraseña debe tener al menos 3 caracteres")
+      .required("Debe ingresar contraseña"),
     name: Yup.string()
-      .min(3, "Name must be at least 3 characters")
-      .max(15, "Name must be 15 characters or less")
-      .required("Must enter a name"),
-    accountType: Yup.string().required("Account type is required"),
+      .min(3, "El nombre debe tener al menos 3 caracteres")
+      .max(15, "El nombre debe tener 15 caracteres o menos")
+      .required("Debe ingresar nombre"),
+    accountType: Yup.string().required("Tipo de cuenta es requeido"),
     group: Yup.string().required("Group is required"),
     phone: Yup.number()
-      .min(10, "Phone number must be at least 10 characters")
-      .required("Must enter a phone number"),
+      .min(10, "El número de teléfono debe tener al menos 10 caracteres")
+      .required("Debe ingresar un número de teléfono"),
     email: Yup.string()
-      .email("Must be a valid email address")
-      .required("Must enter an email"),
+      .email("Debe ser una dirección de correo electrónico válida")
+      .required("Debe ingresar correo electrónico"),
   });
+
+  const onSubmit1 = async (values, { setSubmitting, resetForm }) => {
+    //values.preventDefault();
+
+    onAddUser(values, isEdit, tabIndex, group);
+  
+    try {
+      await addDoc(collection(db, 'usuarios'), {
+        username: values.username,
+        correo: values.email,
+        password: values.password,
+        tipoCuenta: values.accountType,
+        nombre: values.name,
+        celular: values.phone,
+        grupo: values.group
+      });
+    } catch (error) {
+      console.log('Hubo un error al crear el usuario');
+      console.log(error);
+    }
+    //cambiarNombre('');//borrar imput
+    //cambiarCorreo('');//borrar imput
+    resetForm();
+    setSubmitting(false);
+  }
 
   const onSubmit = (values, { setSubmitting, resetForm }) => {
     onAddUser(values, isEdit, tabIndex, group);
@@ -262,14 +267,14 @@ export const AddUsers = (props) => {
       <CardContent className={classes.content}>
         {preview ? null : (
           <Typography variant="h4" align="center">
-            {isEdit ? "Edit User" : "Add User"}
+            {isEdit ? "Editar Usurio" : "Agregar Usuario"}
           </Typography>
         )}
 
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}
-          onSubmit={onSubmit}
+          onSubmit={onSubmit1}
         >
           {({ submitForm, dirty, isValid, ...props }) => (
             <Form>
@@ -316,7 +321,7 @@ export const AddUsers = (props) => {
                     onClick={submitForm}
                     className={classes.button}
                   >
-                    Submit
+                    Enviar
                   </Button>
                 </Box>
               )}

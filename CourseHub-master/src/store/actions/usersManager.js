@@ -1,5 +1,7 @@
 import axios from "../../axios";
 import * as actionTypes from "./actionTypes";
+import db from "../../firebase/firebaseConfig";
+import { collection, addDoc, onSnapshot } from "firebase/firestore";
 
 export const fetchInfoClick = (selectedUser, tabIndex, avatarIndex) => {
   return {
@@ -48,9 +50,31 @@ export const fetchUsersFail = (error) => {
   };
 };
 
+export const ListaUsuarios = () => {
+		onSnapshot(
+			collection(db, 'usuarios'),
+			(snapshot) => {
+				console.log('Se ejecuto snapshot');
+				console.log(snapshot.docs[0].data());
+
+				const arregloUsuarios = snapshot.docs.map((documento) => {
+					return {...documento.data(), id: documento.id}
+				})
+			}
+		);
+}
+
+//const {data, id} = ListaUsuarios()
+//fetchUserDataSuccess(data)
+
 export const fetchUsers = (group) => {
+
   return (dispatch) => {
+    //ListaUsuarios();
     dispatch(fetchUsersStart());
+
+    //toca cambiar el get a get de firebase
+
     axios
       .get(`/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${group}`)
       .then((response) => {
@@ -196,7 +220,7 @@ export const addUser = (values, isEdit, tabIndex, group) => {
         if (isEdit) {
           dispatch(
             addUserSuccess(
-              `Cập nhật tài khoản ${response.data.taiKhoan} thành công!`
+              `Cuenta actulizada ${response.data.taiKhoan} con exito!`
             )
           );
           dispatch(fetchUsers(group));
@@ -205,7 +229,7 @@ export const addUser = (values, isEdit, tabIndex, group) => {
         } else {
           dispatch(
             addUserSuccess(
-              `Thêm tài khoản ${response.data.taiKhoan} thành công!`
+              `Cuenta agrega ${response.data.taiKhoan} con exito!`
             )
           );
           dispatch(fetchUsers(group));
