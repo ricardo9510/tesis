@@ -75,14 +75,27 @@ export const fetchUsers = (group) => {
 
     //toca cambiar el get a get de firebase
 
-    axios
+    /*axios
       .get(`/QuanLyNguoiDung/LayDanhSachNguoiDung?MaNhom=${group}`)
       .then((response) => {
         dispatch(fetchUsersSuccess(response.data));
       })
       .catch((error) => {
         dispatch(fetchUsersFail(error));
-      });
+      });*/
+	  var docRef = db.collection("usuarios");
+
+docRef.get().then(function(doc) {
+    if (doc.exists) {
+	    console.log(doc);
+        console.log("Document data:", doc.data());
+    } else {
+        // doc.data() will be undefined in this case
+        console.log("No such document!");
+    }
+}).catch(function(error) {
+    console.log("Error getting document:", error);
+});
   };
 };
 
