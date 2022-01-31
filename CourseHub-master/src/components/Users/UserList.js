@@ -113,13 +113,13 @@ function UserList(props) {
       const labelId = `checkbox-list-secondary-label-${index}`;
       return (
         <ListItem
-          key={user.taiKhoan}
+          key={user.id}
           button
           onClick={() => handleInfo(user, index)}
         >
           <ListItemAvatar>
             <Badge
-              badgeContent={isGV ? user.maLoaiNguoiDung : null}
+              badgeContent={isGV ? user.nombre :null}
               color="error"
             >
               <Avatar
@@ -134,8 +134,8 @@ function UserList(props) {
           </ListItemAvatar>
           <ListItemText
             id={labelId}
-            primary={user.taiKhoan}
-            secondary={user.email}
+            primary={user.nombre}
+            secondary={user.nombre}
           />
           <ListItemSecondaryAction>
             <Tooltip title="Edit" placement="left">

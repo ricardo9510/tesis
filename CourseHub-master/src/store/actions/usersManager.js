@@ -2,6 +2,7 @@ import axios from "../../axios";
 import * as actionTypes from "./actionTypes";
 import db from "../../firebase/firebaseConfig";
 import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import { ListItem } from "@material-ui/core";
 
 export const fetchInfoClick = (selectedUser, tabIndex, avatarIndex) => {
   return {
@@ -50,18 +51,20 @@ export const fetchUsersFail = (error) => {
   };
 };
 
-export const ListaUsuarios = () => {
-		onSnapshot(
-			collection(db, 'usuarios'),
-			(snapshot) => {
-				console.log('Se ejecuto snapshot');
-				console.log(snapshot.docs[0].data());
+export const listarUsuarios = () => {
+  let result = [];
+  onSnapshot(
+    collection(db, 'usuarios'),
+    (snapshot) => {
+      const arregloUsuarios = snapshot.docs.map((documento) => {
+        return {...documento.data(), id: documento.id}
+      })
 
-				const arregloUsuarios = snapshot.docs.map((documento) => {
-					return {...documento.data(), id: documento.id}
-				})
-			}
-		);
+     result = arregloUsuarios;
+     console.log(result);
+     return result
+    }
+  );
 }
 
 //const {data, id} = ListaUsuarios()
@@ -83,19 +86,18 @@ export const fetchUsers = (group) => {
       .catch((error) => {
         dispatch(fetchUsersFail(error));
       });*/
-	  var docRef = db.collection("usuarios");
-
-docRef.get().then(function(doc) {
-    if (doc.exists) {
-	    console.log(doc);
-        console.log("Document data:", doc.data());
-    } else {
-        // doc.data() will be undefined in this case
-        console.log("No such document!");
-    }
-}).catch(function(error) {
-    console.log("Error getting document:", error);
-});
+      onSnapshot(
+        collection(db, 'usuarios'),
+        (snapshot) => {
+          const arregloUsuarios = snapshot.docs.map((documento) => {
+            return {...documento.data(), id: documento.id}
+          })
+    
+          if(arregloUsuarios.length == 0)
+            dispatch(fetchUsersFail(new Error("No se encontró los usuarios")))
+          dispatch(fetchUsersSuccess(arregloUsuarios));
+        }
+      );
   };
 };
 
