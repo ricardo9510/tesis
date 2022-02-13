@@ -220,7 +220,7 @@ function Dashboard({ darkTheme }) {
     setHandleOpen({ open: true });
   };
 
-  const topSwoop = (
+  const topSwoop = (//ondulaciones arriba
     <svg
       viewBox="0 0 1430 140"
       className={classes.topSwoop}
@@ -253,7 +253,7 @@ function Dashboard({ darkTheme }) {
             Learn How To Build Websites & Apps Write A Code Or Start A Business
           </Typography>
           <Button variant="contained" color="primary" onClick={handleClick}>
-            make a tour
+            Hacer un tour
           </Button>
           <AutoRotatingCarouselModal
             isMobile={matchSM}
@@ -284,14 +284,14 @@ function Dashboard({ darkTheme }) {
       <Box my={5} style={{ minHeight: 520 }}>
         <Box mx={6} py={3}>
           <Typography variant="h5" gutterBottom>
-            <strong>The world's most useless selection of courses</strong>
+            <strong>Descubre el aprendizaje permanente</strong>
           </Typography>
           <Typography variant="subtitle1" gutterBottom>
-            Choose from 1000 online video courses with new additions published
-            every decade
+            Elije los cursos que mas te gusten
           </Typography>
         </Box>
         <CourseList />
+        {/* aqui hay que cambiar a espaniol */}
       </Box>
 
       <Box className={classes.intro}>

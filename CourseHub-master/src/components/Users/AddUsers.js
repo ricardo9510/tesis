@@ -22,7 +22,7 @@ import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 
 import db from "../../firebase/firebaseConfig";
-import { collection, addDoc, onSnapshot } from "firebase/firestore";
+import { doc, collection, addDoc, updateDoc } from "firebase/firestore";
 
 import {
   Box,
@@ -188,6 +188,7 @@ export const AddUsers = (props) => {
   }, [error, success, enqueueSnackbar]);
 
   let initialValues = {
+    id: "",
     username: "",
     password: "",
     email: "",
@@ -199,13 +200,14 @@ export const AddUsers = (props) => {
 
   if ((isEdit && selectedUser) || (preview && selectedUser)) {
     initialValues = {
-      username: selectedUser.taiKhoan,
+      id: selectedUser.id,
+      username: selectedUser.username,
       password: "",
-      email: selectedUser.email,
-      accountType: selectedUser.maLoaiNguoiDung,
-      name: selectedUser.hoTen,
-      phone: selectedUser.soDt,
-      group: group,
+      email: selectedUser.correo,
+      accountType: selectedUser.tipoCuenta,
+      name: selectedUser.nombre,
+      phone: selectedUser.celular,
+      group: selectedUser.grupo,
     };
   }
 
@@ -235,21 +237,33 @@ export const AddUsers = (props) => {
     //values.preventDefault();
 
     onAddUser(values, isEdit, tabIndex, group);
-  
-    try {
-      await addDoc(collection(db, 'usuarios'), {
-        username: values.username,
-        correo: values.email,
+
+    if(isEdit) {
+      await updateDoc(doc(db, 'usuarios', values.id), {
         password: values.password,
         tipoCuenta: values.accountType,
+        correo: values.email,
         nombre: values.name,
         celular: values.phone,
         grupo: values.group
-      });
-    } catch (error) {
-      console.log('Hubo un error al crear el usuario');
-      console.log(error);
+      })
+    } else {
+      try {
+        await addDoc(collection(db, 'usuarios'), {
+          username: values.username,
+          correo: values.email,
+          password: values.password,
+          tipoCuenta: values.accountType,
+          nombre: values.name,
+          celular: values.phone,
+          grupo: values.group
+        });
+      } catch (error) {
+        console.log('Hubo un error al crear el usuario');
+        console.log(error);
+      }
     }
+  
     //cambiarNombre('');//borrar imput
     //cambiarCorreo('');//borrar imput
     resetForm();
@@ -270,7 +284,6 @@ export const AddUsers = (props) => {
             {isEdit ? "Editar Usurio" : "Agregar Usuario"}
           </Typography>
         )}
-
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}

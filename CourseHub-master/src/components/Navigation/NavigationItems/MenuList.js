@@ -74,7 +74,7 @@ const MenuList = (props) => {
             classes={{ collapsed: classes.collapsed, root: classes.root }}
             color={"#da3125"}
             startIcon={<Home className={classes.navIcon} />}
-            label={"Dashboard"}
+            label={"Inicio"}
             amount={""}
             {...commonProps("/")}
             dotOnCollapsed={false}
@@ -93,7 +93,7 @@ const MenuList = (props) => {
             classes={{ collapsed: classes.collapsed, root: classes.root }}
             color={"#1a73e8"}
             startIcon={<ViewList className={classes.navIcon} />}
-            label={"Courses"}
+            label={"Cursos"}
             amount={""}
             {...commonProps("/courses")}
             dotOnCollapsed={false}
@@ -112,7 +112,7 @@ const MenuList = (props) => {
             classes={{ collapsed: classes.collapsed, root: classes.root }}
             color={"#8e44ad"}
             startIcon={<InsertDriveFile className={classes.navIcon} />}
-            label={"Courses Manage"}
+            label={"Gestion Cursos"}
             amount={1000}
             {...commonProps("/courses-management")}
             dotOnCollapsed={true}
@@ -131,7 +131,7 @@ const MenuList = (props) => {
             classes={{ collapsed: classes.collapsed, root: classes.root }}
             color={"#e37400"}
             startIcon={<People className={classes.navIcon} />}
-            label={"Students Manage"}
+            label={"Gestion Usuarios"}
             amount={969}
             {...commonProps("/users-management")}
             dotOnCollapsed={true}
@@ -181,21 +181,21 @@ const MenuList = (props) => {
       </Box>
 
       <List style={{ marginLeft: "-9px" }}>
-        <Tooltip title="Dashboard">
+        <Tooltip title="Inicio">
           <Dashboard />
         </Tooltip>
 
-        <Tooltip title="Courses">
+        <Tooltip title="Cursos">
           <Courses />
         </Tooltip>
 
         {user && user.maLoaiNguoiDung === "GV" ? (
           <Fragment>
-            <Tooltip title="Courses Manage">
+            <Tooltip title="Gestion Cursos">
               <CoursesManage />
             </Tooltip>
 
-            <Tooltip title="Students Manage">
+            <Tooltip title="Gestion Usuarios">
               <StudentsManage />
             </Tooltip>
           </Fragment>

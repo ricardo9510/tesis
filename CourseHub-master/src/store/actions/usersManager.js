@@ -1,8 +1,7 @@
 import axios from "../../axios";
 import * as actionTypes from "./actionTypes";
 import db from "../../firebase/firebaseConfig";
-import { collection, addDoc, onSnapshot } from "firebase/firestore";
-import { ListItem } from "@material-ui/core";
+import { collection, doc, onSnapshot, deleteDoc } from "firebase/firestore";
 
 export const fetchInfoClick = (selectedUser, tabIndex, avatarIndex) => {
   return {
@@ -87,7 +86,8 @@ export const fetchUsers = (group) => {
         dispatch(fetchUsersFail(error));
       });*/
       onSnapshot(
-        collection(db, 'usuarios'),
+        collection(db, 'usuarios')
+        ,
         (snapshot) => {
           const arregloUsuarios = snapshot.docs.map((documento) => {
             return {...documento.data(), id: documento.id}
@@ -175,14 +175,22 @@ export const deleteUser = (selectedUser, group) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${user.accessToken}`,
     };
-    axios({ method: "delete", url, headers })
+    deleteDoc(doc(db, 'usuarios', selectedUser.id)).then(() => {
+      console.log("Document successfully deleted!");
+      dispatch(deleteUserSuccess(true));
+      dispatch(fetchUsers(group));
+    }).catch((error) => {
+      console.error("Error removing document: ", error);
+      dispatch(deleteUserFail(error));
+    });
+    /*axios({ method: "delete", url, headers })
       .then((response) => {
         dispatch(deleteUserSuccess(response.data));
         dispatch(fetchUsers(group));
       })
       .catch((error) => {
         dispatch(deleteUserFail(error.response.data));
-      });
+      });*/
   };
 };
 
@@ -230,12 +238,13 @@ export const addUser = (values, isEdit, tabIndex, group) => {
       email: values.email,
       maLoaiNguoiDung: values.accountType,
     };
+
     axios({ method, url, headers, data })
       .then((response) => {
         if (isEdit) {
           dispatch(
             addUserSuccess(
-              `Cuenta actulizada ${response.data.taiKhoan} con exito!`
+              `Cuenta actualizada ${response.data.taiKhoan} con exito!`
             )
           );
           dispatch(fetchUsers(group));

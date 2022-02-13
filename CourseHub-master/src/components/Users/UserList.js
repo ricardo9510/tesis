@@ -86,7 +86,7 @@ function UserList(props) {
   };
 
   const handleDeleteConfirm = (user) => {
-    enqueueSnackbar(`Are you sure to delete ${user.taiKhoan}?`, {
+    enqueueSnackbar(`Esta seguro de eliminar el usuario ${user.username}?`, {
       variant: "info",
       anchorOrigin: {
         vertical: "bottom",

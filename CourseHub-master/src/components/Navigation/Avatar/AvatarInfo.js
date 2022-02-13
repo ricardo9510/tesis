@@ -9,6 +9,7 @@ import Divider from "@material-ui/core/Divider";
 import { IconButton, Typography, Link, Badge } from "@material-ui/core";
 import FacebookIcon from "@material-ui/icons/Facebook";
 import GitHubIcon from "@material-ui/icons/GitHub";
+import YouTubeIcon from "@material-ui/icons/YouTube";
 
 const useStyles = makeStyles(({ palette }) => ({
   card: {
@@ -76,17 +77,20 @@ export const AvatarInfo = React.memo(function ProfileCard() {
         </CardContent>
       ) : null}
       <Divider light />
-      <Typography className={styles.subheader}>
-        Designed by niemtin007
+      <Typography className={styles.subheader} style={{ marginBottom: 0 }}>
+        Diseñado por 
+      </Typography>
+      <Typography className={styles.subheader} >
+        Preuniversitario MAYA
       </Typography>
       <Typography className={styles.subheader} style={{ marginBottom: 0 }}>
-        Contact me
+        Contactanos
       </Typography>
       <Box display="flex" justifyContent="center">
         <IconButton
           size="small"
           component={Link}
-          href="https://www.facebook.com/niemtin007"
+          href="https://www.facebook.com/PreuniversitarioMaya"
           target="_blank"
           rel="noopener"
         >
@@ -95,15 +99,18 @@ export const AvatarInfo = React.memo(function ProfileCard() {
         <IconButton
           size="small"
           component={Link}
-          href="https://github.com/niemtin007"
+          href="https://www.youtube.com/channel/UC6lXX4LieM585PUIdvvg9Lg"
           target="_blank"
           rel="noopener"
         >
-          <GitHubIcon style={{ fontSize: "1.125rem" }} />
+          <YouTubeIcon />
         </IconButton>
       </Box>
+      <Typography className={styles.subheader} style={{ marginBottom: 0 }}>
+        © Copyright 2022
+      </Typography>
       <Typography className={styles.subheader}>
-        © Copyright 2020 CourseHub.
+        Preuniversitario MAYA.
       </Typography>
     </Card>
   );
