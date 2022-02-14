@@ -163,7 +163,7 @@ const Courses = (props) => {
       <Card className={cx(cardStyles.root, shadowStyles.root)}>
         <Box display="flex" justifyContent="center" mt={3}>
           <Typography variant="h3" className={cardStyles.title}>
-            My Courses
+            Mis Cursos
           </Typography>
         </Box>
 

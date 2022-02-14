@@ -94,7 +94,7 @@ function CourseList(props) {
           <Box mb={1} mr={1} width={"100%"}>
             <TextField
               id="filled-search"
-              label="Search Course..."
+              label="Buscar Curso..."
               type="search"
               fullWidth
               onChange={(event) =>

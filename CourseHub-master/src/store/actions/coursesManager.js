@@ -70,7 +70,7 @@ export const fetchCoursesList = (keyWord, group, courseType) => {
     axios
       .get(url)
       .then((response) => {
-        // console.log(response.data);
+        //console.log(response.data);
         dispatch(fetchCoursesListSuccess(response.data));
       })
       .catch((error) => {
@@ -156,9 +156,9 @@ export const addCourse = (
       .then((response) => {
         console.log("Post data: ", data);
         console.log("Add/Edit Response: ", response.data);
-        let message = `Thêm khóa học mới ${response.data.tenKhoaHoc} thành công`;
+        let message = `Creación del nuevo curso ${response.data.tenKhoaHoc} con exito`;
         if (isEdit) {
-          message = `Cập nhật khóa học ${response.data.tenKhoaHoc} thành công`;
+          message = `Actualización del curso ${response.data.tenKhoaHoc} con exito`;
         }
 
         if (selectedImage) {

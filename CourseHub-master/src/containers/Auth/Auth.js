@@ -15,7 +15,7 @@ import * as actions from "../../store/actions";
 const useStyles = makeStyles((theme) => ({
   container: {
     minHeight: "100vh",
-    background: "linear-gradient(120deg, #2980b9, #8e44ad)",
+    background: "linear-gradient(300deg, #009DD9, #17406D)",
   },
 
   loginForm: {
@@ -96,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
     height: "3rem",
     border: "none",
     borderRadius: "3px",
-    background: "linear-gradient(120deg, #2980b9, #8e44ad, #2980b9)",
+    background: "linear-gradient(120deg, #17406D, #009DD9, #17406D)",
     backgroundSize: "200%",
     color: "#fff",
     outline: "none",
@@ -156,12 +156,12 @@ export const Auth = (props) => {
   let initialValues = { username: "", password: "" };
   let validationSchema = Yup.object().shape({
     username: Yup.string()
-      .min(3, "Name must be at least 3 characters")
-      .max(15, "Name must be 15 characters or less")
+      .min(3, "El nombre debe tener al menos 3 caracteres ")
+      .max(15, "El nombre debe tener 15 caracteres o menos")
       .required("Must enter a name"),
     password: Yup.string()
-      .min(3, "Password must be at least 3 characters")
-      .required("Password is required"),
+      .min(3, "La contraseña debe tener al menos 3 caracteres")
+      .required("Se requiere contraseña"),
   });
   //Aquí queman un grupo, el GP08
   if (isSignUp) {
@@ -171,31 +171,31 @@ export const Auth = (props) => {
       confirmPassword: "",
       name: "",
       phone: "",
-      group: "GP08",
+      group: "GP04",
       email: "",
     };
     validationSchema = Yup.object().shape({
       username: Yup.string()
-        .min(3, "Username must be at least 3 characters")
-        .max(15, "Username must be 15 characters or less")
-        .required("Must enter a username"),
+        .min(3, "El nombre de usuario debe tener al menos 3 caracteres")
+        .max(15, "El nombre de usuario debe tener 15 caracteres o menos")
+        .required("Debe ingresar un nombre de usuario"),
       password: Yup.string()
-        .min(3, "Password must be at least 3 characters")
-        .required("Password is required"),
+        .min(3, "La contraseña debe tener al menos 3 caracteres")
+        .required("Se requiere contraseña"),
       confirmPassword: Yup.string()
-        .oneOf([Yup.ref("password"), null], "Passwords must match")
-        .required("Confirm Password is required"),
+        .oneOf([Yup.ref("password"), null], "Las contraseñas deben coincidir")
+        .required("Se requiere confirmar contraseña"),
       name: Yup.string()
-        .min(3, "Name must be at least 3 characters")
-        .max(15, "Name must be 15 characters or less")
-        .required("Must enter a name"),
-      group: Yup.string().required("Group is required"),
+        .min(3, "El nombre debe tener al menos 3 caracteres")
+        .max(15, "El nombre debe tener 15 caracteres o menos")
+        .required("Debe ingresar un nombre"),
+      group: Yup.string().required("Se requiere grupo"),
       phone: Yup.number()
-        .min(10, "Phone number must be at least 10 characters")
-        .required("Must enter a phone number"),
+        .min(10, "El número de teléfono debe tener al menos 10 caracteres")
+        .required("Debe ingresar un número de teléfono"),
       email: Yup.string()
-        .email("Must be a valid email address")
-        .required("Must enter an email"),
+        .email("Debe ser una dirección de correo electrónico válida")
+        .required("Debe ingresar un correo electrónico"),
     });
   }
 
@@ -226,22 +226,22 @@ export const Auth = (props) => {
           <Form className={classes.loginForm}>
             <Box mt={isSignUp ? 5 : 10} mb={isSignUp ? 3 : 5}>
               <Typography variant="h3" align="center">
-                {isSignUp ? "Sign Up" : "Login"}
+                {isSignUp ? "Inscribirse" : "Logear"}
               </Typography>
             </Box>
             <FormGroup>
               <CustomInput label="Username" name="username" type="text" />
-              <CustomInput label="Password" name="password" type="password" />
+              <CustomInput label="Contraseña" name="password" type="password" />
             </FormGroup>
             {isSignUp ? (
               <FormGroup>
                 <CustomInput
-                  label="Confirm Password"
+                  label="Confirmar Contraseña"
                   name="confirmPassword"
                   type="password"
                 />
-                <CustomInput label="Name" name="name" type="text" />
-                <CustomInput label="Phone" name="phone" type="text" />
+                <CustomInput label="Nombre" name="name" type="text" />
+                <CustomInput label="Celular" name="phone" type="text" />
                 <CustomInput label="Email" name="email" type="email" />
                 <NativeSelect
                   value={props.values.group}
@@ -250,21 +250,12 @@ export const Auth = (props) => {
                   name="group"
                   style={{ marginTop: 16 }}
                 >
-                  <option value={"GP01"}>Group 01</option>
-                  <option value={"GP02"}>Group 02</option>
-                  <option value={"GP03"}>Group 03</option>
-                  <option value={"GP04"}>Group 04</option>
-                  <option value={"GP05"}>Group 05</option>
-                  <option value={"GP06"}>Group 06</option>
-                  <option value={"GP07"}>Group 07</option>
-                  <option value={"GP08"}>Group 08</option>
-                  <option value={"GP09"}>Group 09</option>
-                  <option value={"GP10"}>Group 10</option>
-                  <option value={"GP11"}>Group 11</option>
-                  <option value={"GP12"}>Group 12</option>
-                  <option value={"GP13"}>Group 13</option>
-                  <option value={"GP14"}>Group 14</option>
-                  <option value={"GP15"}>Group 15</option>
+                  <option value={"GP01"}>Inicial</option>
+                  <option value={"GP02"}>Basica</option>
+                  <option value={"GP03"}>Bachillerato</option>
+                  <option value={"GP04"}>Preuniversitario</option>
+                  <option value={"GP05"}>Universtario</option>
+                  <option value={"GP06"}>Profesional</option>
                 </NativeSelect>
               </FormGroup>
             ) : null}
@@ -288,15 +279,15 @@ export const Auth = (props) => {
             >
               <Typography component="p">
                 {isSignUp
-                  ? "Already have an account?"
-                  : "Don't have an account?"}{" "}
+                  ? "Ya tienes una cuenta?"
+                  : "Aun no tienes una cuenta?"}{" "}
                 {isSignUp ? (
                   <Link to="/sign-in" className={classes.link}>
-                    Sign In
+                    Iniciar sesión
                   </Link>
                 ) : (
                   <Link to="/sign-up" className={classes.link}>
-                    Sign Up
+                    Inscribirse
                   </Link>
                 )}
               </Typography>

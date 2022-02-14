@@ -68,7 +68,7 @@ const DropMenu = (props) => {
           component={Link}
           to={"/logout"}
         >
-          Log Out
+          Salir
         </Button>
       </Box>
       <Box my={matchMD ? 0 : 1} ml={matchMD ? 1 : 0}>
@@ -82,7 +82,7 @@ const DropMenu = (props) => {
           component={Link}
           to={"/my-courses"}
         >
-          My Courses
+          Mis cursos
         </Button>
       </Box>
       <Box m={matchMD ? 0 : 1}>
@@ -113,7 +113,7 @@ const DropMenu = (props) => {
           to={"/sign-in"}
           className={classes.button}
         >
-          Login
+          Entrar
         </Button>
         <Button
           color="default"
@@ -122,7 +122,7 @@ const DropMenu = (props) => {
           to={"/sign-up"}
           className={classes.button}
         >
-          Sign Up
+          Inscribirse
         </Button>
       </ButtonGroup>
     </Box>

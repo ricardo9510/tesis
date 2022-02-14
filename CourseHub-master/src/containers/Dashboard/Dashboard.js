@@ -95,37 +95,37 @@ const useStyles = makeStyles((theme) => ({
 const slideItems = [
   {
     media: course1,
-    title: "This is a very cool feature",
-    subtitle: "Just using this will blow your mind.",
+    title: "Esta es una característica muy interesante.",
+    subtitle: "Solo usar esto te dejará boquiabierto.",
   },
   {
     media: course2,
-    title: "Ever wanted to be popular?",
-    subtitle: "Well just mix two colors and your are good to go!",
+    title: "¿Alguna vez quisiste ser popular?",
+    subtitle: "Bueno, solo mezcla dos colores y ¡ya estás listo!",
   },
   {
     media: course3,
-    title: "May the force be with you",
+    title: "Que la fuerza lo acompañe",
     subtitle:
-      "The Force is a metaphysical and ubiquitous power in the Star Wars fictional universe.",
+      "La Fuerza es un poder metafísico y ubicuo en el universo ficticio de Star Wars.",
   },
   {
     media: course4,
-    title: "May the force be with you",
+    title: "Que la fuerza lo acompañe",
     subtitle:
-      "The Force is a metaphysical and ubiquitous power in the Star Wars fictional universe.",
+      "La Fuerza es un poder metafísico y ubicuo en el universo ficticio de Star Wars.",
   },
   {
     media: course5,
-    title: "May the force be with you",
+    title: "Que la fuerza lo acompañe",
     subtitle:
-      "The Force is a metaphysical and ubiquitous power in the Star Wars fictional universe.",
+      "La Fuerza es un poder metafísico y ubicuo en el universo ficticio de Star Wars.",
   },
   {
     media: course6,
-    title: "May the force be with you",
+    title: "Que la fuerza lo acompañe",
     subtitle:
-      "The Force is a metaphysical and ubiquitous power in the Star Wars fictional universe.",
+      "La Fuerza es un poder metafísico y ubicuo en el universo ficticio de Star Wars.",
   },
 ];
 
@@ -155,20 +155,20 @@ const tileData = [
 const featureList = [
   {
     icon: <LiveTv />,
-    title: "online courses",
-    subtitle: "Enjoy a variety of fresh topics",
+    title: "cursos online",
+    subtitle: "Disfruta de una variedad de temas nuevos.",
     count: <CountUp end={1000} duration={6} style={{ marginRight: 4 }} />,
   },
   {
     icon: <Bookmark />,
-    title: "Expert instruction",
-    subtitle: "Find the right instructor for you",
+    title: "Instrucción experta",
+    subtitle: "Encuentra el instructor adecuado para ti",
     count: null,
   },
   {
     icon: <AllInclusive />,
-    title: "Lifetime access",
-    subtitle: "Learn on your schedule",
+    title: "Acceso de por vida",
+    subtitle: "Aprende en tu horario",
     count: null,
   },
 ];
@@ -177,7 +177,7 @@ const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile }) => {
   return (
     <div>
       <AutoRotatingCarousel
-        label="Get started"
+        label="Empezar"
         open={handleOpen.open}
         onClose={() => setHandleOpen({ open: false })}
         onStart={() => setHandleOpen({ open: false })}
@@ -247,10 +247,10 @@ function Dashboard({ darkTheme }) {
       <Grid container alignItems="center" className={classes.header}>
         <Grid item className={classes.heroText}>
           <Typography variant="h4" gutterBottom>
-            Learn HTML , CSS , Web Apps & More
+            Aprende HTML , CSS , Web Apps & Mas
           </Typography>
           <Typography variant="subtitle1" gutterBottom>
-            Learn How To Build Websites & Apps Write A Code Or Start A Business
+            Aprenda a crear sitios web & aplicaciones. Escriba un código o inicie un negocio
           </Typography>
           <Button variant="contained" color="primary" onClick={handleClick}>
             Hacer un tour
@@ -305,13 +305,12 @@ function Dashboard({ darkTheme }) {
           <Box mx={5} minWidth={315} alignSelf="center">
             <Box>
               <Typography variant="h4" color="inherit">
-                Choose and Enroll your favor courses
+                Elija e inscriba sus cursos favoritos
               </Typography>
             </Box>
             <Box mt={3}>
               <Typography>
-                Simply sign up as a verified user on Course Hub to start to
-                access many good course resourses.
+                Simplemente regístrese como usuario verificado en Preuniversitario MAYA para comenzar a acceder a muchos buenos recursos del curso.
               </Typography>
             </Box>
             {user ? null : (
@@ -323,7 +322,7 @@ function Dashboard({ darkTheme }) {
                   to={"/sign-up"}
                   style={{ width: 150 }}
                 >
-                  Sign up
+                  Inscribirse
                 </Button>
                 <Button
                   variant="outlined"
@@ -331,7 +330,7 @@ function Dashboard({ darkTheme }) {
                   to={"/sign-in"}
                   style={{ width: 150, marginLeft: 8, color: "inherit" }}
                 >
-                  Log in
+                  Entrar
                 </Button>
               </Box>
             )}
@@ -373,11 +372,10 @@ function Dashboard({ darkTheme }) {
               </Typography>
               <Box ml={1} display="flex" flexDirection="column">
                 <Typography variant="h4">
-                  Easy to search the topic you want to learn or teaching
+                  Fácil de buscar el tema que desea aprender o enseñar
                 </Typography>
                 <Typography style={{ marginTop: 16 }}>
-                  Course Hub is collect on many resourses. People who study at
-                  the Course Hub can archive knowledge by join suitable topic.
+                  Preuniversitario MAYA recopila muchos recursos. Las personas que estudian en Preuniversitario MAYA pueden archivar el conocimiento uniéndose al tema adecuado.
                 </Typography>
               </Box>
             </Box>
@@ -390,12 +388,12 @@ function Dashboard({ darkTheme }) {
               </Typography>
               <Box ml={1} display="flex" flexDirection="column">
                 <Typography variant="h4">
-                  Join us to help share knowledge for the community
+                  Únase a nosotros para ayudar a compartir conocimientos para la comunidad
                 </Typography>
                 <Typography style={{ marginTop: 16 }}>
-                  We have an enthusiastic and responsible team of teachers from
-                  many companies and corporations with many years of experience.
-                  Join us to grow together.
+                  Contamos con un equipo entusiasta y responsable de profesores de
+                   muchas empresas y corporaciones con muchos años de experiencia.
+                   Únete a nosotros para crecer juntos.
                 </Typography>
               </Box>
             </Box>
@@ -408,13 +406,13 @@ function Dashboard({ darkTheme }) {
               </Typography>
               <Box ml={1} display="flex" flexDirection="column">
                 <Typography variant="h4">
-                  Course Hub users easy to achieve the desired skills
+                  Los usuarios de Preuniversitario MAYA son fáciles de lograr las habilidades deseadas
                 </Typography>
                 <Typography style={{ marginTop: 16 }}>
-                  Course Hub system is meticulously built to enhance the
-                  interaction between students and teachers. It provides an
-                  authentic and easy experience to gain knowledge as well as
-                  help teachers easily access students
+                  El sistema Preuniversitario MAYA está construido meticulosamente para mejorar la
+                   interacción entre alumnos y profesores. Proporciona un
+                   experiencia auténtica y fácil de adquirir conocimientos, así como
+                   ayudar a los maestros a acceder fácilmente a los estudiantess
                 </Typography>
               </Box>
             </Box>
@@ -446,11 +444,11 @@ function Dashboard({ darkTheme }) {
           <Box mx={5} mt={5} minWidth={315} alignSelf="center">
             <Box>
               <Typography variant="h4" color="inherit">
-                A bunch of topics are waiting you
+                Un montón de temas te están esperando
               </Typography>
             </Box>
             <Box mt={3}>
-              <Typography>What are you waiting for? join us now!</Typography>
+              <Typography>¿Que estas esperando? ¡Únete a nosotros ahora!</Typography>
             </Box>
             {user ? null : (
               <Box mt={2}>
@@ -462,7 +460,7 @@ function Dashboard({ darkTheme }) {
                   to={"/sign-up"}
                   style={{ width: 150 }}
                 >
-                  Sign up
+                  Inscribirse
                 </Button>
               </Box>
             )}

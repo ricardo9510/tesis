@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "3rem",
     border: "none",
-    background: "linear-gradient(120deg, #2980b9, #8e44ad, #2980b9)",
+    background: "linear-gradient(120deg, #17406D, #009DD9, #17406D)",
     backgroundSize: "200%",
     color: "#fff",
     outline: "none",
@@ -147,16 +147,16 @@ const AddCourses = (props) => {
   }
 
   let validationSchema = Yup.object().shape({
-    courseId: Yup.string().required("Must enter a courseId"),
+    courseId: Yup.string().required("Debe ingresar el ID del curso"),
     urlName: Yup.string(),
-    courseName: Yup.string().required("Must enter a courseName"),
-    detail: Yup.string().required("Detail is required"),
+    courseName: Yup.string().required("Debe ingresar el nombre del curso"),
+    detail: Yup.string().required("Detalle es requerido"),
     views: Yup.number(),
     imageUrl: Yup.string(),
-    group: Yup.string().required("Group is required"),
-    dateCreated: Yup.date().required("Must enter a created day"),
-    creator: Yup.string().required("Must input creator"),
-    courseCode: Yup.string().required("Must input courseIndex"),
+    group: Yup.string().required("Grupo es requerido"),
+    dateCreated: Yup.date().required("Debe ingresar el dia creado"),
+    creator: Yup.string().required("Debe ingresar creador"),
+    courseCode: Yup.string().required("Debe ingresar el indice del curso"),
   });
 
   const onSubmit = (values, { setSubmitting, resetForm }) => {
@@ -179,7 +179,7 @@ const AddCourses = (props) => {
         {preview ? null : (
           <Box mb={5}>
             <Typography variant="h4" align="center">
-              {isEdit ? "EDIT COURSE" : "ADD COURSE"}
+              {isEdit ? "Editar Curso" : "Agregar Curso"}
             </Typography>
           </Box>
         )}
@@ -215,7 +215,7 @@ const AddCourses = (props) => {
                             borderColor="grey.400"
                           >
                             <Typography align="center" color="textSecondary">
-                              Please upload an image for preview
+                              Sube una imagen para obtener una vista previa
                             </Typography>
                           </Box>
                         )}
@@ -225,7 +225,7 @@ const AddCourses = (props) => {
                       </Box>
                       <Box mb={1}>
                         <FormikField
-                          label="Course Name"
+                          label="Nombre del Curso"
                           name="courseName"
                           disabled={isEdit || preview}
                         />
@@ -242,17 +242,17 @@ const AddCourses = (props) => {
                         alignItems="stretch"
                       >
                         <FormikField
-                          label="Course ID"
+                          label="ID del Curso"
                           name="courseId"
                           disabled={isEdit || preview}
                         />
                         <FormikField
-                          label="Creator"
+                          label="Creador"
                           name="creator"
                           disabled={preview}
                         />
                         <FormikField
-                          label="Views"
+                          label="Vistas"
                           name="views"
                           disabled={preview}
                         />
@@ -270,14 +270,14 @@ const AddCourses = (props) => {
 
                 <Card style={{ padding: 0 }}>
                   <FormikField
-                    label="Description"
+                    label="Descripción"
                     name="detail"
                     disabled={preview}
                   />
                   <Box display={"flex"} flexWrap="wrap">
                     <Box flexGrow={1}>
                       <FormikSelect
-                        label="Course Type"
+                        label="Tipo Curso"
                         name="courseCode"
                         items={courseIndex}
                         disabled={preview}
@@ -285,7 +285,7 @@ const AddCourses = (props) => {
                     </Box>
                     <Box flexGrow={1}>
                       <FormikSelect
-                        label="Group"
+                        label="Grupo"
                         name="group"
                         items={groupItems}
                         disabled={preview}
@@ -305,7 +305,7 @@ const AddCourses = (props) => {
                         filesLimit={1}
                         showAlerts={false}
                         acceptedFiles={["image/*"]}
-                        dropzoneText={"Drag and drop an image here or click"}
+                        dropzoneText={"Arrastre y suelte una imagen aquí o haga clic"}
                         onChange={(image) => setSelectedImage(image[0])}
                       />
                     </Box>
@@ -321,7 +321,7 @@ const AddCourses = (props) => {
                       onClick={submitForm}
                       className={classes.button}
                     >
-                      Submit
+                      Enviar
                     </Button>
                   </Box>
                 )}

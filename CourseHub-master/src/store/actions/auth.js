@@ -46,10 +46,10 @@ export const auth = (values, history, isSignUp) => {
       .post(url, authData)
       .then((response) => {
         if (isSignUp) {
-          dispatch(authSuccess(response.data, "Create account successfuly!"));
+          dispatch(authSuccess(response.data, "¡Cuenta creada con éxito!"));
           history.push("/sign-in");
         } else {
-          dispatch(authSuccess(response.data, "Login successfuly!"));
+          dispatch(authSuccess(response.data, "¡Inicio de sesión con éxito!"));
           localStorage.setItem("user", JSON.stringify(response.data));
           history.push("/");
         }

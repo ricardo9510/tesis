@@ -20,7 +20,7 @@ export default function DatePicker({ pickSelectedDate, value, disabled }) {
         margin="normal"
         inputVariant="outlined"
         id="date-picker-dialog"
-        label="Date picker dialog"
+        label="Calendario"
         format="MM/dd/yyyy"
         value={value}
         onChange={handleDateChange}

@@ -272,10 +272,10 @@ const UserDetails = (props) => {
               id="panel1bh-header"
             >
               <Typography className={styles.expanseHeading}>
-                Pending Courses
+                Cursos Pendientes
               </Typography>
               <Typography className={styles.secondaryHeading}>
-                Need approve to allow the user accessing
+                Necesita aprobación para permitir que el usuario acceda
               </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
@@ -294,10 +294,10 @@ const UserDetails = (props) => {
               id="panel2bh-header"
             >
               <Typography className={styles.expanseHeading}>
-                Approved Courses
+                Cursos Aprobados
               </Typography>
               <Typography className={styles.secondaryHeading}>
-                The courses have already accessed by user
+                Los cursos ya han accedido por usuario
               </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>
@@ -316,10 +316,10 @@ const UserDetails = (props) => {
               id="panel3bh-header"
             >
               <Typography className={styles.expanseHeading}>
-                Available courses
+                Cursos disponibles
               </Typography>
               <Typography className={styles.secondaryHeading}>
-                Registing a course quickly for user
+                Registrar un curso rápidamente para el usuario
               </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>

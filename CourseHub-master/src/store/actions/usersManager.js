@@ -253,7 +253,7 @@ export const addUser = (values, isEdit, tabIndex, group) => {
         } else {
           dispatch(
             addUserSuccess(
-              `Cuenta agrega ${response.data.taiKhoan} con exito!`
+              `Cuenta agregada ${response.data.taiKhoan} con exito!`
             )
           );
           dispatch(fetchUsers(group));

@@ -1,5 +1,7 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
+import { doc, query, collection, where, getDocs } from "firebase/firestore";
+import db from "../../firebase/firebaseConfig";
 
 // ----------------- Course Index ------------------ //
 export const fetchCourseIndexStart = () => {
@@ -29,6 +31,7 @@ export const fetchCourseIndex = (init) => {
       .get("/QuanLyKhoaHoc/LayDanhMucKhoaHoc")
       .then((response) => {
         dispatch(fetchCourseIndexSuccess(response.data));
+        console.log(response.data)
         if (init) {
           dispatch(fetchCourses(response.data[0].maDanhMuc));
         }

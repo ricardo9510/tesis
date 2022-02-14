@@ -99,7 +99,7 @@ function UserList(props) {
           onClick={() => onDeleteUser(user, group)}
           startIcon={<DeleteIcon />}
         >
-          Delete
+          Eliminar
         </Button>
       ),
     });

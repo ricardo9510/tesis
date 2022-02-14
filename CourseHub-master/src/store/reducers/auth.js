@@ -6,7 +6,7 @@ const initialState = {
   success: null,
   error: null,
   loading: false,
-  group: "GP08",
+  group: "GP04",
   accountName: null,
   authRedirectPath: "/",
 };

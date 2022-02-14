@@ -50,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     height: "3rem",
     border: "none",
-    background: "linear-gradient(120deg, #2980b9, #8e44ad, #2980b9)",
+    background: "linear-gradient(120deg, #17406D, #009DD9, #17406D)",
     backgroundSize: "200%",
     color: "#fff",
     outline: "none",
@@ -127,26 +127,17 @@ const FormikSelect = ({ label, name, items, disabled }) => {
 };
 
 const userTypeItems = [
-  { label: "Học Viên", value: "HV" },
-  { label: "Giảng Viên", value: "GV" },
+  { label: "Estudiante", value: "HV" },
+  { label: "Profesor", value: "GV" },
 ];
 
 const userItems = [
-  { label: "Group 01", value: "GP01" },
-  { label: "Group 02", value: "GP02" },
-  { label: "Group 03", value: "GP03" },
-  { label: "Group 04", value: "GP04" },
-  { label: "Group 05", value: "GP05" },
-  { label: "Group 06", value: "GP06" },
-  { label: "Group 07", value: "GP07" },
-  { label: "Group 08", value: "GP08" },
-  { label: "Group 09", value: "GP09" },
-  { label: "Group 10", value: "GP10" },
-  { label: "Group 11", value: "GP11" },
-  { label: "Group 12", value: "GP12" },
-  { label: "Group 13", value: "GP13" },
-  { label: "Group 14", value: "GP14" },
-  { label: "Group 15", value: "GP15" },
+  { label: "Inicial", value: "GP01" },
+  { label: "Basica", value: "GP02" },
+  { label: "Bachillerato", value: "GP03" },
+  { label: "Preuniversitario", value: "GP04" },
+  { label: "Universtario", value: "GP05" },
+  { label: "Profesional", value: "GP06" },
 ];
 
 export const AddUsers = (props) => {
@@ -292,7 +283,7 @@ export const AddUsers = (props) => {
           {({ submitForm, dirty, isValid, ...props }) => (
             <Form>
               <FormikField
-                label="Username"
+                label="Usuario"
                 name="username"
                 disabled={isEdit || preview}
               />
@@ -309,17 +300,17 @@ export const AddUsers = (props) => {
               )}
 
               <FormikSelect
-                label="Account type"
+                label="Tipo Cuenta"
                 name="accountType"
                 items={userTypeItems}
                 disabled={preview}
               />
-              <FormikField label="Name" name="name" disabled={preview} />
-              <FormikField label="Phone" name="phone" disabled={preview} />
+              <FormikField label="Nombre" name="name" disabled={preview} />
+              <FormikField label="Celular" name="phone" disabled={preview} />
 
               {preview ? null : (
                 <FormikSelect
-                  label="Choose a group"
+                  label="Nivel Educativo"
                   name="group"
                   items={userItems}
                 />

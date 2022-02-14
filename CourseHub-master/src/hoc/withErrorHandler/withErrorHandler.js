@@ -21,13 +21,13 @@ export default function RealWorld() {
           </Grid>
           <Grid item>
             <Typography>
-              You have lost connection to the internet. This app is offline.
+              Has perdido la conexión a Internet. Esta aplicación está fuera de línea.
             </Typography>
           </Grid>
         </Grid>
         <Grid container justify="flex-end" spacing={1}>
           <Grid item>
-            <Button color="primary">Turn on wifi</Button>
+            <Button color="primary">Revisa tu wifi</Button>
           </Grid>
         </Grid>
       </Paper>
