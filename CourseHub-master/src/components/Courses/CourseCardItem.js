@@ -85,7 +85,7 @@ const CourseCard = (props) => {
   };
 
   const handleDeleteConfirm = (course) => {
-    enqueueSnackbar(`Are you sure to delete ${course.tenKhoaHoc}?`, {
+    enqueueSnackbar(`Are you sure to delete ${course.courseName}?`, {
       variant: "info",
       anchorOrigin: {
         vertical: "bottom",
@@ -109,8 +109,8 @@ const CourseCard = (props) => {
       <CardActionArea onClick={() => handCourseInfo(course)}>
         <CardMedia
           className={classes.media}
-          image={course.hinhAnh}
-          title={course.tenKhoaHoc}
+          image={course.imageUrl}
+          title={course.courseName}
         />
         <CardContent>
           <Typography
@@ -119,7 +119,7 @@ const CourseCard = (props) => {
             component="h5"
             // noWrap
           >
-            {course.tenKhoaHoc}
+            {course.courseName}
           </Typography>
         </CardContent>
       </CardActionArea>

@@ -1,5 +1,7 @@
 import axios from "../../axios";
 import * as actionTypes from "./actionTypes";
+import {addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where} from "firebase/firestore";
+import db from "../../firebase/firebaseConfig";
 
 export const fetchUsersClick = (selectedCourse, tabIndex) => {
   return {
@@ -57,25 +59,29 @@ export const fetchCoursesList = (keyWord, group, courseType) => {
   // console.log(courseType);
 
   return (dispatch) => {
+    let queryFirebase = query(collection(db,"cursos") , where("group", "==", group));
     let url = `/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=${group}`;
     if (courseType !== "all") {
+     queryFirebase = query(collection(db,"cursos") ,  where("courseType", "==", courseType), where("group", "==", group));
       url = `/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${courseType}&MaNhom=${group}`;
-      // console.log("ahihi");
     }
     if (keyWord) {
+      queryFirebase = query(collection(db,"cursos") ,  where("courseName", "==", keyWord), where("group", "==", group));
       url = `/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${keyWord}&MaNhom=${group}`;
     }
 
     dispatch(fetchCoursesListStart());
-    axios
-      .get(url)
+    getDocs(queryFirebase)
       .then((response) => {
-        //console.log(response.data);
-        dispatch(fetchCoursesListSuccess(response.data));
+        let result = [];
+        response.forEach((doc) => {
+          result.push({...doc.data(), id:doc.id})
+        });
+        dispatch(fetchCoursesListSuccess(result));
       })
       .catch((error) => {
         // console.log(error.response.data);
-        dispatch(fetchCoursesListFail(error.response.data));
+        dispatch(fetchCoursesListFail(error));
       });
   };
 };
@@ -139,49 +145,82 @@ export const addCourse = (
     };
 
     const data = {
-      maKhoaHoc: values.courseId.trim(),
-      biDanh: values.courseName.trim().replace(/\s+/g, "-").toLowerCase(),
-      tenKhoaHoc: values.courseName.trim(),
-      moTa: values.detail.trim(),
-      luotXem: values.views,
-      danhGia: values.rate,
-      hinhAnh: ".jpg",
-      maNhom: values.group,
-      ngayTao: dateString,
-      maDanhMucKhoaHoc: values.courseCode,
-      taiKhoanNguoiTao: values.creator.trim(),
+      courseId: values.courseId.trim(),
+      courseDescription: values.courseName.trim().replace(/\s+/g, "-").toLowerCase(),
+      courseName: values.courseName.trim(),
+      courseType: courseType,
+      description: values.detail.trim(),
+      views: values.views,
+      rate: values.rate,
+      extensionImage: ".jpg",
+      imageUrl: ".jpg",
+      group: values.group,
+      date: dateString,
+      courseCode: values.courseCode,
+      creator: values.creator.trim(),
     };
 
-    axios({ url, method, data, headers })
-      .then((response) => {
-        console.log("Post data: ", data);
-        console.log("Add/Edit Response: ", response.data);
-        let message = `Creación del nuevo curso ${response.data.tenKhoaHoc} con exito`;
-        if (isEdit) {
-          message = `Actualización del curso ${response.data.tenKhoaHoc} con exito`;
-        }
+    if (isEdit) {
+      updateDoc(doc(db, 'cursos', data.courseId), data)
+          .then((response) => {
+            console.log("Post data: ", data);
+            let message = `Creación del nuevo curso ${data.courseName} con exito`;
+            if (isEdit) {
+              message = `Actualización del curso ${data.courseName} con exito`;
+            }
 
-        if (selectedImage) {
-          dispatch(
-            uploadImage(
-              selectedImage,
-              response.data.tenKhoaHoc,
-              response.data.maNhom
-            )
-          );
-        }
+            if (selectedImage) {
+              dispatch(
+                  uploadImage(
+                      selectedImage,
+                      data.courseName,
+                      data.group
+                  )
+              );
+            }
 
-        dispatch(addCourseSuccess(response.data, message));
-        dispatch(fetchCoursesList(null, group, courseType));
-        // The reason of error if activate the action below is:
-        // --> this response.data has different selectedCourse structure
+            dispatch(addCourseSuccess(response, message));
+            dispatch(fetchCoursesList(null, group, courseType));
+            // The reason of error if activate the action below is:
+            // --> this response.data has different selectedCourse structure
 
-        // dispatch(editCourseClick(response.data, tabIndex));
-      })
-      .catch((error) => {
-        // console.log(error.response.data);
-        dispatch(addCourseFail(error.response.data));
-      });
+            // dispatch(editCourseClick(response.data, tabIndex));
+          })
+          .catch((error) => {
+            // console.log(error.response.data);
+            dispatch(addCourseFail(error.response));
+          });
+    }else{
+      addDoc(collection(db, 'cursos'), data)
+          .then((response) => {
+            console.log("Post data: ", data);
+            let message = `Creación del nuevo curso ${data.courseName} con exito`;
+            if (isEdit) {
+              message = `Actualización del curso ${data.courseName} con exito`;
+            }
+
+            if (selectedImage) {
+              dispatch(
+                  uploadImage(
+                      selectedImage,
+                      data.courseName,
+                      data.group
+                  )
+              );
+            }
+
+            dispatch(addCourseSuccess(response, message));
+            dispatch(fetchCoursesList(null, group, courseType));
+            // The reason of error if activate the action below is:
+            // --> this response.data has different selectedCourse structure
+
+            // dispatch(editCourseClick(response.data, tabIndex));
+          })
+          .catch((error) => {
+            // console.log(error.response.data);
+            dispatch(addCourseFail(error.response));
+          });
+    }
   };
 };
 
@@ -444,18 +483,19 @@ export const uploadImage = (selectedImage, courseName, group) => {
   return (dispatch) => {
     dispatch(uploadImageStart());
     const url = "/QuanLyKhoaHoc/UploadHinhAnhKhoaHoc";
-    const formData = new FormData();
-    formData.append("File", selectedImage, selectedImage.name);
-    formData.append("tenKhoaHoc", courseName);
-    formData.append("maNhom", group);
+    const formData = {
+      file: selectedImage.name,
+      courseName: courseName,
+      group: group
+    };
 
-    axios({ method: "POST", url, data: formData })
+    addDoc(collection(db, 'imagenes'), formData)
       .then((response) => {
         // console.log("response", response.data);
-        dispatch(uploadImageSuccess(response.data));
+        dispatch(uploadImageSuccess(formData));
       })
       .catch((error) => {
-        console.log("uploadImage:", error.response.data);
+        console.log("uploadImage:", error);
         dispatch(uploadImageFail(error.response));
       });
   };
@@ -490,14 +530,14 @@ export const deleteCourse = (selectedCourse, keyWord, group, courseType) => {
       "Content-Type": "application/json",
       Authorization: `Bearer ${user.accessToken}`,
     };
-    axios({ method: "delete", url, headers })
+    deleteDoc(doc(db, 'cursos', selectedCourse.id))
       .then((response) => {
         // console.log(response.data);
-        dispatch(deleteCourseSuccess(response.data));
+        dispatch(deleteCourseSuccess(selectedCourse));
         dispatch(fetchCoursesList(keyWord, group, courseType));
       })
       .catch((error) => {
-        dispatch(deleteCourseFail(error.response.data));
+        dispatch(deleteCourseFail(error));
       });
   };
 };

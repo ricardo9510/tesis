@@ -132,17 +132,17 @@ const AddCourses = (props) => {
 
   if ((isEdit && selectedCourse) || (preview && selectedCourse)) {
     initialValues = {
-      courseId: selectedCourse.maKhoaHoc,
-      urlName: selectedCourse.biDanh,
-      courseName: selectedCourse.tenKhoaHoc,
-      detail: selectedCourse.moTa,
-      views: selectedCourse.luotXem,
-      rate: selectedCourse.danhGia,
-      imageUrl: selectedCourse.hinhAnh,
-      group: selectedCourse.maNhom,
+      courseId: selectedCourse.courseId,
+      urlName: selectedCourse.urlName,
+      courseName: selectedCourse.courseName,
+      detail: selectedCourse.detail,
+      views: selectedCourse.views,
+      rate: selectedCourse.rate,
+      imageUrl: selectedCourse.imageUrl,
+      group: selectedCourse.group,
       dateCreated: selectedDate,
-      courseCode: selectedCourse.danhMucKhoaHoc.maDanhMucKhoahoc,
-      creator: selectedCourse.nguoiTao.taiKhoan,
+      //courseCode: selectedCourse.danhMucKhoaHoc.maDanhMucKhoahoc,
+      //creator: selectedCourse.nguoiTao.taiKhoan,
     };
   }
 
