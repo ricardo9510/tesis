@@ -11,6 +11,7 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import ArchiveIcon from "@material-ui/icons/Archive";
+import SchoolIcon from '@material-ui/icons/School';
 
 import AvatarItem from "../Avatar/AvatarItem";
 import DarkThemeSwitch from "../../SwitchButton/DarkThemeSwitch";
@@ -77,7 +78,7 @@ const DropMenu = (props) => {
           color="default"
           variant={isTheme ? "outlined" : "contained"}
           size="small"
-          startIcon={<ArchiveIcon />}
+          startIcon={<SchoolIcon />}
           className={classes.button}
           component={Link}
           to={"/my-courses"}

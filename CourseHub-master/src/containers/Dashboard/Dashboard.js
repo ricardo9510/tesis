@@ -263,23 +263,7 @@ function Dashboard({ darkTheme }) {
         </Grid>
       </Grid>
 
-      <Box pb={7} className={classes.feature}>
-        <Grid container justify="space-between" alignItems="center">
-          {featureList.map((item) => (
-            <Box m={2} display="flex" alignItems="center" key={item.title}>
-              <Avatar className={classes.avatar}>{item.icon}</Avatar>
-              <Box ml={1} display="flex" flexDirection="column">
-                <Box display="flex" alignItems="center">
-                  {item.count ? item.count : null}
-                  <Typography variant="subtitle1">{item.title}</Typography>
-                </Box>
-                <Typography variant="caption">{item.subtitle}</Typography>
-              </Box>
-            </Box>
-          ))}
-        </Grid>
-        <Box>{bottomSwoop}</Box>
-      </Box>
+      {/* aqui deberia ir los auspiciantes */}
 
       <Box my={5} style={{ minHeight: 520 }}>
         <Box mx={6} py={3}>
@@ -300,17 +284,17 @@ function Dashboard({ darkTheme }) {
           display="flex"
           flexDirection="column"
           justifyContent="center"
-          minHeight="90vh"
+          minHeight="70vh"
         >
           <Box mx={5} minWidth={315} alignSelf="center">
             <Box>
               <Typography variant="h4" color="inherit">
-                Elija e inscriba sus cursos favoritos
+                Elije e inscribite en tus sus cursos favoritos
               </Typography>
             </Box>
             <Box mt={3}>
               <Typography>
-                Simplemente regístrese como usuario verificado en Preuniversitario MAYA para comenzar a acceder a muchos buenos recursos del curso.
+                Simplemente regístrate en Preuniversitario MAYA para comenzar a estudiar y recibir certificados.
               </Typography>
             </Box>
             {user ? null : (
@@ -322,7 +306,7 @@ function Dashboard({ darkTheme }) {
                   to={"/sign-up"}
                   style={{ width: 150 }}
                 >
-                  Inscribirse
+                  Inscribete
                 </Button>
                 <Button
                   variant="outlined"
@@ -330,7 +314,7 @@ function Dashboard({ darkTheme }) {
                   to={"/sign-in"}
                   style={{ width: 150, marginLeft: 8, color: "inherit" }}
                 >
-                  Entrar
+                  Ingresar
                 </Button>
               </Box>
             )}
@@ -343,7 +327,7 @@ function Dashboard({ darkTheme }) {
         <Box width="100vh">
           <Carousel
             animation={"slide"}
-            timeout={500}
+            timeout={250}
             indicators={false}
             className={classes.carousel}
           >
@@ -367,15 +351,13 @@ function Dashboard({ darkTheme }) {
         >
           <Box alignSelf="flex-start" maxWidth={500} m={5}>
             <Box display="flex">
-              <Typography variant="h1" className={classes.titleNumber}>
-                1
-              </Typography>
               <Box ml={1} display="flex" flexDirection="column">
                 <Typography variant="h4">
-                  Fácil de buscar el tema que desea aprender o enseñar
+                  Fácil de buscar el curso que desea aprender
                 </Typography>
                 <Typography style={{ marginTop: 16 }}>
-                  Preuniversitario MAYA recopila muchos recursos. Las personas que estudian en Preuniversitario MAYA pueden archivar el conocimiento uniéndose al tema adecuado.
+                  Preuniversitario MAYA tiene muchos cursos a tu disposición. Las personas que ingresan
+                  tienen acceso a toda la información y recursos de los cursos seleccionado.
                 </Typography>
               </Box>
             </Box>
@@ -383,17 +365,13 @@ function Dashboard({ darkTheme }) {
 
           <Box alignSelf="flex-end" maxWidth={500} m={5}>
             <Box display="flex">
-              <Typography variant="h1" className={classes.titleNumber}>
-                2
-              </Typography>
               <Box ml={1} display="flex" flexDirection="column">
                 <Typography variant="h4">
-                  Únase a nosotros para ayudar a compartir conocimientos para la comunidad
+                  Profesores de excelencia
                 </Typography>
                 <Typography style={{ marginTop: 16 }}>
-                  Contamos con un equipo entusiasta y responsable de profesores de
-                   muchas empresas y corporaciones con muchos años de experiencia.
-                   Únete a nosotros para crecer juntos.
+                  En Preuniversitario MAYA contamos con un equipo dinámico, responsable e innovador que son profesores y formadores 
+                  de empresas y corporaciones experimentadas.
                 </Typography>
               </Box>
             </Box>
@@ -401,18 +379,13 @@ function Dashboard({ darkTheme }) {
 
           <Box alignSelf="flex-start" maxWidth={500} m={5}>
             <Box display="flex">
-              <Typography variant="h1" className={classes.titleNumber}>
-                3
-              </Typography>
               <Box ml={1} display="flex" flexDirection="column">
                 <Typography variant="h4">
-                  Los usuarios de Preuniversitario MAYA son fáciles de lograr las habilidades deseadas
+                  Adquiere tus nuevas habilidades deseadas
                 </Typography>
                 <Typography style={{ marginTop: 16 }}>
-                  El sistema Preuniversitario MAYA está construido meticulosamente para mejorar la
-                   interacción entre alumnos y profesores. Proporciona un
-                   experiencia auténtica y fácil de adquirir conocimientos, así como
-                   ayudar a los maestros a acceder fácilmente a los estudiantess
+                  El aplicativo web Preuniversitario MAYA está construido meticulosamente para mejorar la
+                  interacción entre alumnos y profesores. Proporciona un experiencia auténtica y fácil de adquirir conocimientos.
                 </Typography>
               </Box>
             </Box>
@@ -441,7 +414,7 @@ function Dashboard({ darkTheme }) {
           justifyContent="center"
           minHeight="50vh"
         >
-          <Box mx={5} mt={5} minWidth={315} alignSelf="center">
+          <Box mx={5} mt={20} minWidth={315} alignSelf="center">
             <Box>
               <Typography variant="h4" color="inherit">
                 Un montón de temas te están esperando
