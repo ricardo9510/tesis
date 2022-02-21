@@ -1,7 +1,8 @@
 import axios from "../../axios";
 import * as actionTypes from "./actionTypes";
 import {addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where} from "firebase/firestore";
-import db from "../../firebase/firebaseConfig";
+import db, {app} from "../../firebase/firebaseConfig";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export const fetchUsersClick = (selectedCourse, tabIndex) => {
   return {
@@ -153,7 +154,7 @@ export const addCourse = (
       views: values.views,
       rate: values.rate,
       extensionImage: ".jpg",
-      imageUrl: ".jpg",
+      imageUrl: selectedImage.name,
       group: values.group,
       date: dateString,
       courseCode: values.courseCode,
@@ -163,7 +164,6 @@ export const addCourse = (
     if (isEdit) {
       updateDoc(doc(db, 'cursos', data.courseId), data)
           .then((response) => {
-            console.log("Post data: ", data);
             let message = `Creación del nuevo curso ${data.courseName} con exito`;
             if (isEdit) {
               message = `Actualización del curso ${data.courseName} con exito`;
@@ -174,12 +174,13 @@ export const addCourse = (
                   uploadImage(
                       selectedImage,
                       data.courseName,
-                      data.group
+                      data.group,
+                      response.id
                   )
               );
             }
 
-            dispatch(addCourseSuccess(response, message));
+            dispatch(addCourseSuccess("Success", message));
             dispatch(fetchCoursesList(null, group, courseType));
             // The reason of error if activate the action below is:
             // --> this response.data has different selectedCourse structure
@@ -193,7 +194,6 @@ export const addCourse = (
     }else{
       addDoc(collection(db, 'cursos'), data)
           .then((response) => {
-            console.log("Post data: ", data);
             let message = `Creación del nuevo curso ${data.courseName} con exito`;
             if (isEdit) {
               message = `Actualización del curso ${data.courseName} con exito`;
@@ -204,12 +204,13 @@ export const addCourse = (
                   uploadImage(
                       selectedImage,
                       data.courseName,
-                      data.group
+                      data.group,
+                      response.id
                   )
               );
             }
 
-            dispatch(addCourseSuccess(response, message));
+            dispatch(addCourseSuccess("Success", message));
             dispatch(fetchCoursesList(null, group, courseType));
             // The reason of error if activate the action below is:
             // --> this response.data has different selectedCourse structure
@@ -479,7 +480,7 @@ export const uploadImageFail = (error) => {
   };
 };
 
-export const uploadImage = (selectedImage, courseName, group) => {
+export const uploadImage = (selectedImage, courseName, group, courseId) => {
   return (dispatch) => {
     dispatch(uploadImageStart());
     const url = "/QuanLyKhoaHoc/UploadHinhAnhKhoaHoc";
@@ -489,15 +490,21 @@ export const uploadImage = (selectedImage, courseName, group) => {
       group: group
     };
 
-    addDoc(collection(db, 'imagenes'), formData)
-      .then((response) => {
-        // console.log("response", response.data);
-        dispatch(uploadImageSuccess(formData));
+    const storage = getStorage();
+    const mountainImagesRef = ref(storage, selectedImage.name);
+
+    // 'file' comes from the Blob or File API
+    uploadBytes(mountainImagesRef, selectedImage).then((response) => {
+      getDownloadURL(ref(storage, selectedImage.name)).then((url) => {
+        updateDoc(doc(db, 'cursos', courseId), {imageUrl: url }).then((responseUpdate) => {
+          dispatch(uploadImageSuccess("Success"));
+        })
       })
-      .catch((error) => {
-        console.log("uploadImage:", error);
-        dispatch(uploadImageFail(error.response));
-      });
+    })
+    .catch((error) => {
+      console.log("uploadImage:", error);
+      dispatch(uploadImageFail(error.response));
+    });
   };
 };
 
@@ -533,7 +540,7 @@ export const deleteCourse = (selectedCourse, keyWord, group, courseType) => {
     deleteDoc(doc(db, 'cursos', selectedCourse.id))
       .then((response) => {
         // console.log(response.data);
-        dispatch(deleteCourseSuccess(selectedCourse));
+        dispatch(deleteCourseSuccess("Success"));
         dispatch(fetchCoursesList(keyWord, group, courseType));
       })
       .catch((error) => {

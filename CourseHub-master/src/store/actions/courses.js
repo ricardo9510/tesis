@@ -30,10 +30,15 @@ export const fetchCourseIndex = (init) => {
     axios
       .get("/QuanLyKhoaHoc/LayDanhMucKhoaHoc")
       .then((response) => {
-        dispatch(fetchCourseIndexSuccess(response.data));
-        console.log(response.data)
+        const mapCursos = [{maDanhMuc: 'BackEnd', tenDanhMuc: 'Programación BackEnd'},
+         {maDanhMuc: 'Design', tenDanhMuc: 'Diseño Web'},
+         {maDanhMuc: 'DiDong', tenDanhMuc: 'Programacion Movil'},
+         {maDanhMuc: 'FrontEnd', tenDanhMuc: ' Programacion Front End'},  
+         {maDanhMuc: 'FullStack', tenDanhMuc: 'Programacion Full Stack'},
+         {maDanhMuc: 'TuDuy', tenDanhMuc: 'Logica de Programación'}];
+        dispatch(fetchCourseIndexSuccess(mapCursos));
         if (init) {
-          dispatch(fetchCourses(response.data[0].maDanhMuc));
+          dispatch(fetchCourses(mapCursos[0].maDanhMuc));
         }
       })
       .catch((error) => {

@@ -135,14 +135,14 @@ const AddCourses = (props) => {
       courseId: selectedCourse.courseId,
       urlName: selectedCourse.urlName,
       courseName: selectedCourse.courseName,
-      detail: selectedCourse.detail,
+      detail: selectedCourse.description,
       views: selectedCourse.views,
       rate: selectedCourse.rate,
       imageUrl: selectedCourse.imageUrl,
       group: selectedCourse.group,
       dateCreated: selectedDate,
-      //courseCode: selectedCourse.danhMucKhoaHoc.maDanhMucKhoahoc,
-      //creator: selectedCourse.nguoiTao.taiKhoan,
+      creator: selectedCourse.creator,
+      courseCode: selectedCourse.courseCode,
     };
   }
 
