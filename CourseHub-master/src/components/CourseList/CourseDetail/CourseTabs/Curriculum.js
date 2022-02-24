@@ -42,13 +42,13 @@ export default function Curriculum() {
         >
           <Typography className={classes.heading}>General settings</Typography>
           <Typography className={classes.secondaryHeading}>
-            I am an expansion panel
+            Soy un panel de expansión
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
-            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-            Aliquam eget maximus est, id dignissim quam.
+            Nada es complicado. Hay algo que ver con lo que mucha gente extraña.
+            Es hora de actualizar el mayor activo
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -63,14 +63,14 @@ export default function Curriculum() {
         >
           <Typography className={classes.heading}>Users</Typography>
           <Typography className={classes.secondaryHeading}>
-            You are currently not an owner
+            Actualmente no eres propietario
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
-            Donec placerat, lectus sed mattis semper, neque lectus feugiat
-            lectus, varius pulvinar diam eros in elit. Pellentesque convallis
-            laoreet laoreet.
+            Hasta la inmobiliaria, la cama pero la inmobiliaria siempre
+            la cama, el sofá varía en el patio trasero. Convallis pellentesco
+            entrada inválida
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -85,13 +85,13 @@ export default function Curriculum() {
         >
           <Typography className={classes.heading}>Advanced settings</Typography>
           <Typography className={classes.secondaryHeading}>
-            Filtering has been entirely disabled for whole web server
+            El filtrado se ha deshabilitado por completo para todo el servidor web
           </Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer
-            sit amet egestas eros, vitae egestas augue. Duis vel est augue.
+            Ahora la vida de los orcos es justa, el autor está ahora en el fin de semana de los jugadores. Entero
+            Hay amor, pobreza, eros, pobreza de vida. Es normal o propaganda.
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -108,8 +108,8 @@ export default function Curriculum() {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
-            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer
-            sit amet egestas eros, vitae egestas augue. Duis vel est augue.
+            Ahora la vida de los orcos es justa, el autor está ahora en el fin de semana de los jugadores. Entero
+            Hay amor, pobreza, eros, pobreza de vida. Es normal o propaganda.
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>

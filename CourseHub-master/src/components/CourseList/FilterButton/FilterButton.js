@@ -29,13 +29,13 @@ const FilterButton = (props) => {
       size="small"
       className={classes.formControl}
     >
-      <InputLabel>Filter by</InputLabel>
+      <InputLabel>Filtrado por</InputLabel>
       <Select
         value={courseType}
         onChange={(event) => onChangeIndex(event.target.value)}
         label="Filter by"
       >
-        <MenuItem value="all">All Topic</MenuItem>
+        <MenuItem value="all">Todos los temas</MenuItem>
         {courseIndex.map((group) => (
           <MenuItem key={group.maDanhMuc} value={group.maDanhMuc}>
             {group.tenDanhMuc}

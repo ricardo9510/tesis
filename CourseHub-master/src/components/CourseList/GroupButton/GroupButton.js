@@ -25,7 +25,7 @@ const GroupButton = (props) => {
       className={classes.formControl}
       disabled={isMe}
     >
-      <InputLabel>Choose Group</InputLabel>
+      <InputLabel>Elegir grupo</InputLabel>
       <Select
         value={group}
         onChange={(event) => onChangeGroup(event.target.value)}

@@ -17,10 +17,10 @@ export default function Overview() {
     <Fragment>
       <Box mt={1}>
         <Typography variant="h5" gutterBottom>
-          Description
+          Descripcion
         </Typography>
         <Typography variant="subtitle1" gutterBottom>
-          Description Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+          Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
           sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna
           aliquam erat volutpat. Ut wisi enim ad minim laoreet dolore magna
           aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud
@@ -33,7 +33,7 @@ export default function Overview() {
 
       <Box mt={2}>
         <Typography variant="h5" gutterBottom>
-          What You’ll Learn
+          Lo que aprenderás
         </Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
@@ -91,7 +91,7 @@ export default function Overview() {
 
       <Box mt={2}>
         <Typography variant="h5" gutterBottom>
-          Requirements
+          Requisitos
         </Typography>
         <Grid container spacing={2}>
           <Grid item>
@@ -121,7 +121,7 @@ export default function Overview() {
 
       <Box mt={2}>
         <Typography variant="h5" gutterBottom>
-          Here Is Exactly What We Cover In This Course:
+          Esto es exactamente lo que cubrimos en este curso:
         </Typography>
         <Typography variant="subtitle1" gutterBottom>
           Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam

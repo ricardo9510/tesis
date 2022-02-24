@@ -55,7 +55,7 @@ const HorizontalCard = ({ course }) => {
               </Grid>
               <Grid item>
                 <Typography variant="body2" style={{ cursor: "pointer" }}>
-                  Go to this course
+                  Ir a este curso
                 </Typography>
               </Grid>
             </Grid>

@@ -98,7 +98,7 @@ const CourseCard = (props) => {
           onClick={() => onDeleteCourse(course, null, group, courseType)}
           startIcon={<Delete />}
         >
-          Delete
+          Borrar
         </Button>
       ),
     });

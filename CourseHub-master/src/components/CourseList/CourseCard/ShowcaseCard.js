@@ -113,7 +113,7 @@ const ShowcaseCard = (props) => {
 
       <Box mt={2}>
         <Typography align="center" variant="h5" gutterBottom>
-          Free 100%
+          Gratis
         </Typography>
       </Box>
 
@@ -135,7 +135,7 @@ const ShowcaseCard = (props) => {
             style={{ textDecoration: "none" }}
           >
             <Button size="small" className={cardStyles.button}>
-              Login to Enroll
+              Inicia sesion e inscribite
             </Button>
           </Box>
         </Box>
@@ -143,7 +143,7 @@ const ShowcaseCard = (props) => {
 
       <Box mt={2}>
         <Box ml={2}>
-          <Typography variant="subtitle1">This course includes</Typography>
+          <Typography variant="subtitle1">Este curso incluye</Typography>
         </Box>
         <List disablePadding dense>
           {infoList.map((info, index) => (

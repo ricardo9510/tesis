@@ -143,7 +143,7 @@ const CourseDetails = (props) => {
               <ListItemText
                 id={user.biDanh}
                 primary={user.taiKhoan}
-                // style={{ paddingRight: 90 }}
+              // style={{ paddingRight: 90 }}
               />
               <ListItemSecondaryAction>
                 <IconButton
@@ -276,10 +276,10 @@ const CourseDetails = (props) => {
               id="panel2bh-header"
             >
               <Typography className={styles.expanseHeading}>
-                Approved Users
+                Usuarios aprobados
               </Typography>
               <Typography className={styles.secondaryHeading}>
-                These users had right to access this course
+                Estos usuarios tenían derecho a acceder a este curso
               </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>{usersApprovedRender}</ExpansionPanelDetails>
@@ -296,10 +296,10 @@ const CourseDetails = (props) => {
               id="panel3bh-header"
             >
               <Typography className={styles.expanseHeading}>
-                Refuse users
+                Usario Rechazado
               </Typography>
               <Typography className={styles.secondaryHeading}>
-                Enroll this course directly for users
+                Inscríbase en este directorio de cursos para usuarios
               </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>

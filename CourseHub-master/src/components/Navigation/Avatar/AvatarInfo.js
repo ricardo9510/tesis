@@ -8,8 +8,8 @@ import Avatar from "@material-ui/core/Avatar";
 import Divider from "@material-ui/core/Divider";
 import { IconButton, Typography, Link, Badge } from "@material-ui/core";
 import FacebookIcon from "@material-ui/icons/Facebook";
-import GitHubIcon from "@material-ui/icons/GitHub";
 import YouTubeIcon from "@material-ui/icons/YouTube";
+import imgavatar from "../../../assets/images/logomaya.png";
 
 const useStyles = makeStyles(({ palette }) => ({
   card: {
@@ -65,15 +65,15 @@ export const AvatarInfo = React.memo(function ProfileCard() {
           >
             <Avatar
               className={styles.avatar}
-              src={"https://i.pravatar.cc/150?img=14"}
+              src={imgavatar}
             />
           </Badge>
           <h3 className={styles.heading}>{user.taiKhoan}</h3>
-          <span className={styles.subheader}>
+          {/* <span className={styles.subheader}>
             {user.maNhom}
             <br />
             {user.email}
-          </span>
+          </span> */}
         </CardContent>
       ) : null}
       <Divider light />

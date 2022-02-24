@@ -82,8 +82,8 @@ export const CourseCardDetail = React.memo(function ReviewCard() {
           </Typography>
         </Box>
         <Typography color={"textSecondary"} variant={"body2"}>
-          Talking about travelling or new jobs, many people often think of
-          change of environment...
+          Hablando de viajes o de nuevos trabajos, muchas personas suelen pensar en
+          cambio de ambiente...
         </Typography>
         <Box
           mt={2}
