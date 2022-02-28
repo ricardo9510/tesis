@@ -85,7 +85,7 @@ const CourseCard = (props) => {
   };
 
   const handleDeleteConfirm = (course) => {
-    enqueueSnackbar(`Are you sure to delete ${course.courseName}?`, {
+    enqueueSnackbar(`Esta seguro de eliminar ${course.courseName}?`, {
       variant: "info",
       anchorOrigin: {
         vertical: "bottom",

@@ -74,6 +74,11 @@ const App = ({ onTryAutoSignup }) => {
           Component={CoursesManager}
           isAdmin={isAdmin}
         />
+        <RouteAdmin
+          path="/payments-management"
+          Component={About}
+          isAdmin={isAdmin}
+        />
         {/* Without Layout */}
         <Route path="/sign-in" component={Auth} />
         <Route path="/sign-up" component={Auth} />

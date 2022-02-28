@@ -67,7 +67,7 @@ const CourseCard = ({ course }) => {
             {course.tenKhoaHoc}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {course.luotXem} views
+            {course.luotXem} vistas
           </Typography>
         </CardContent>
       </CardActionArea>

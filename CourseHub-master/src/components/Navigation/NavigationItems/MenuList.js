@@ -16,7 +16,8 @@ import {
   Home,
   People,
   ViewList,
-  InsertDriveFile,
+  Payment,
+  Layers,
 } from "@material-ui/icons";
 
 import GmailSidebarItem from "@mui-treasury/components/sidebarItem/gmail";
@@ -111,10 +112,29 @@ const MenuList = (props) => {
           <GmailSidebarItem
             classes={{ collapsed: classes.collapsed, root: classes.root }}
             color={"#8e44ad"}
-            startIcon={<InsertDriveFile className={classes.navIcon} />}
+            startIcon={<Layers className={classes.navIcon} />}
             label={"Gestion Cursos"}
-            amount={1000}
+            amount={""}
             {...commonProps("/courses-management")}
+            dotOnCollapsed={true}
+          />
+        </Link>
+      </div>
+    );
+  });
+
+  const PaymentsManage = React.forwardRef(function MyComponent(props, ref) {
+    //  Extienda los accesorios al elemento DOM subyacente. 
+    return (
+      <div {...props} ref={ref}>
+        <Link to="/payments-management" className={classes.navlink}>
+          <GmailSidebarItem
+            classes={{ collapsed: classes.collapsed, root: classes.root }}
+            color={"#44AD95"}
+            startIcon={<Payment className={classes.navIcon} />}
+            label={"Gestion Pagos"}
+            amount={""}
+            {...commonProps("/payments-management")}
             dotOnCollapsed={true}
           />
         </Link>
@@ -132,7 +152,7 @@ const MenuList = (props) => {
             color={"#e37400"}
             startIcon={<People className={classes.navIcon} />}
             label={"Gestion Usuarios"}
-            amount={969}
+            amount={""}
             {...commonProps("/users-management")}
             dotOnCollapsed={true}
           />
@@ -148,7 +168,7 @@ const MenuList = (props) => {
         <Link to="/about" className={classes.navlink}>
           <GmailSidebarItem
             classes={{ collapsed: classes.collapsed, root: classes.root }}
-            color={""}
+            color={"#2BB2ED"}
             startIcon={<Info className={classes.navIcon} />}
             label={"About"}
             amount={""}
@@ -198,6 +218,11 @@ const MenuList = (props) => {
             <Tooltip title="Gestion Usuarios">
               <StudentsManage />
             </Tooltip>
+
+            <Tooltip title="Gestion Pagos">
+              <PaymentsManage />
+            </Tooltip>
+
           </Fragment>
         ) : null}
 
