@@ -203,7 +203,7 @@ const useStyles = makeStyles((theme) => ({
 const PageNotFound = ({ history }) => {
   const styles = useStyles();
   const user = JSON.parse(localStorage.getItem("user"));
-  const isAdmin = user && user.maLoaiNguoiDung === "GV";
+  const isAdmin = user && user.tipoCuenta === "GV";
   const [isAdminRouter, setIsAdminRouter] = useState(null);
   const pathName = history.location.pathname;
 

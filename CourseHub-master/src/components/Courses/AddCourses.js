@@ -117,6 +117,7 @@ const AddCourses = (props) => {
   }, [error, success, enqueueSnackbar]);
 
   let initialValues = {
+    id: "",
     courseId: "",
     urlName: "",
     courseName: "",
@@ -126,12 +127,13 @@ const AddCourses = (props) => {
     imageUrl: "",
     group: group,
     dateCreated: selectedDate,
-    courseCode: "",
+    courseType: "",
     creator: user ? user.taiKhoan : "",
   };
 
   if ((isEdit && selectedCourse) || (preview && selectedCourse)) {
     initialValues = {
+      id: selectedCourse.id,
       courseId: selectedCourse.courseId,
       urlName: selectedCourse.urlName,
       courseName: selectedCourse.courseName,
@@ -142,7 +144,7 @@ const AddCourses = (props) => {
       group: selectedCourse.group,
       dateCreated: selectedDate,
       creator: selectedCourse.creator,
-      courseCode: selectedCourse.courseCode,
+      courseType: selectedCourse.courseType,
     };
   }
 
@@ -156,7 +158,7 @@ const AddCourses = (props) => {
     group: Yup.string().required("Grupo es requerido"),
     dateCreated: Yup.date().required("Debe ingresar el dia creado"),
     creator: Yup.string().required("Debe ingresar creador"),
-    courseCode: Yup.string().required("Debe ingresar el indice del curso"),
+    courseType: Yup.string().required("Debe ingresar el indice del curso"),
   });
 
   const onSubmit = (values, { setSubmitting, resetForm }) => {
@@ -278,7 +280,7 @@ const AddCourses = (props) => {
                     <Box flexGrow={1}>
                       <FormikSelect
                         label="Tipo Curso"
-                        name="courseCode"
+                        name="courseType"
                         items={courseIndex}
                         disabled={preview}
                       />

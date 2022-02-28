@@ -53,14 +53,14 @@ const useStyles = makeStyles(({ palette }) => ({
 export const AvatarInfo = React.memo(function ProfileCard() {
   const styles = useStyles();
   const user = JSON.parse(localStorage.getItem("user"));
-  const isGV = user && user.maLoaiNguoiDung === "GV";
+  const isGV = user && user.tipoCuenta === "GV";
 
   return (
     <Card className={cx(styles.card)}>
       {user ? (
         <CardContent>
           <Badge
-            badgeContent={isGV ? user.maLoaiNguoiDung : null}
+            badgeContent={isGV ? user.tipoCuenta : null}
             color="error"
           >
             <Avatar

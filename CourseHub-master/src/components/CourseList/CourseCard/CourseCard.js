@@ -51,11 +51,11 @@ const CourseCard = ({ course }) => {
 
   return (
     <Card className={classes.root}>
-      <CardActionArea component={Link} to={`/courses/${course.maKhoaHoc}`}>
+      <CardActionArea component={Link} to={`/courses/${course.courseId}`}>
         <CardMedia
           className={classes.media}
-          image={course.hinhAnh}
-          title={course.tenKhoaHoc}
+          image={course.imageUrl}
+          title={course.courseName}
         />
         <CardContent>
           <Typography
@@ -64,10 +64,10 @@ const CourseCard = ({ course }) => {
             variant="subtitle2"
             component="h5"
           >
-            {course.tenKhoaHoc}
+            {course.courseName}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            {course.luotXem} vistas
+            {course.views} vistas
           </Typography>
         </CardContent>
       </CardActionArea>
@@ -94,7 +94,7 @@ const CourseCard = ({ course }) => {
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography paragraph variant="body2">
-            {course.moTa}
+            {course.description}
           </Typography>
         </CardContent>
       </Collapse>

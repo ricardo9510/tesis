@@ -109,7 +109,7 @@ function UserList(props) {
 
   if (userList && userList.length > 0) {
     userListRender = userList.map((user, index) => {
-      const isGV = user.maLoaiNguoiDung === "GV";
+      const isGV = user.tipoCuenta === "GV";
       const labelId = `checkbox-list-secondary-label-${index}`;
       return (
         <ListItem

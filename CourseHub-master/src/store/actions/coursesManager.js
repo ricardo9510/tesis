@@ -1,7 +1,7 @@
 import axios from "../../axios";
 import * as actionTypes from "./actionTypes";
 import {addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where} from "firebase/firestore";
-import db, {app} from "../../firebase/firebaseConfig";
+import db from "../../firebase/firebaseConfig";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export const fetchUsersClick = (selectedCourse, tabIndex) => {
@@ -154,15 +154,15 @@ export const addCourse = (
       views: values.views,
       rate: values.rate,
       extensionImage: ".jpg",
-      imageUrl: selectedImage.name,
+      imageUrl: values.imageUrl,
       group: values.group,
       date: dateString,
-      courseCode: values.courseCode,
+      courseType: values.courseType,
       creator: values.creator.trim(),
     };
 
     if (isEdit) {
-      updateDoc(doc(db, 'cursos', data.courseId), data)
+      updateDoc(doc(db, 'cursos', values.id), data)
           .then((response) => {
             let message = `Creación del nuevo curso ${data.courseName} con exito`;
             if (isEdit) {
@@ -175,7 +175,7 @@ export const addCourse = (
                       selectedImage,
                       data.courseName,
                       data.group,
-                      response.id
+                      values.id
                   )
               );
             }

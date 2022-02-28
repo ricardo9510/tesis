@@ -169,10 +169,10 @@ export const Auth = (props) => {
       username: "",
       password: "",
       confirmPassword: "",
-      name: "",
-      phone: "",
-      group: "GP04",
-      email: "",
+      nombre: "",
+      celular: "",
+      grupo: "GP04",
+      correo: "",
     };
     validationSchema = Yup.object().shape({
       username: Yup.string()
@@ -185,15 +185,15 @@ export const Auth = (props) => {
       confirmPassword: Yup.string()
         .oneOf([Yup.ref("password"), null], "Las contraseñas deben coincidir")
         .required("Se requiere confirmar contraseña"),
-      name: Yup.string()
+      nombre: Yup.string()
         .min(3, "El nombre debe tener al menos 3 caracteres")
         .max(15, "El nombre debe tener 15 caracteres o menos")
         .required("Debe ingresar un nombre"),
-      group: Yup.string().required("Se requiere grupo"),
-      phone: Yup.number()
+      grupo: Yup.string().required("Se requiere grupo"),
+      celular: Yup.number()
         .min(10, "El número de teléfono debe tener al menos 10 caracteres")
         .required("Debe ingresar un número de teléfono"),
-      email: Yup.string()
+      correo: Yup.string()
         .email("Debe ser una dirección de correo electrónico válida")
         .required("Debe ingresar un correo electrónico"),
     });
@@ -240,14 +240,14 @@ export const Auth = (props) => {
                   name="confirmPassword"
                   type="password"
                 />
-                <CustomInput label="Nombre" name="name" type="text" />
-                <CustomInput label="Celular" name="phone" type="text" />
-                <CustomInput label="Email" name="email" type="email" />
+                <CustomInput label="Nombre" name="nombre" type="text" />
+                <CustomInput label="Celular" name="celular" type="text" />
+                <CustomInput label="Email" name="correo" type="email" />
                 <NativeSelect
                   value={props.values.group}
                   onChange={props.handleChange}
                   onBlur={props.handleBlur}
-                  name="group"
+                  name="grupo"
                   style={{ marginTop: 16 }}
                 >
                   <option value={"GP01"}>Inicial</option>

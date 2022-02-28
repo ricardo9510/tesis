@@ -1,5 +1,6 @@
-import axios from "../../axios";
 import * as actionTypes from "./actionTypes";
+import {addDoc, collection,getDocs, query,where} from "firebase/firestore";
+import db from "../../firebase/firebaseConfig";
 
 export const authStart = () => {
   return {
@@ -25,38 +26,41 @@ export const authFail = (error) => {
 //Función que realiza un axios para loguearse
 export const auth = (values, history, isSignUp) => {
   return (dispatch) => {
+    const queryAuth = query(collection(db,"usuarios") ,  where("username", "==",  values.username), where("password", "==", values.password));
     dispatch(authStart());
-    let url = "/QuanLyNguoiDung/DangNhap";
-    let authData = {
-      taiKhoan: values.username,
-      matKhau: values.password,
-    };
     if (isSignUp) {
-      url = "/QuanLyNguoiDung/DangKy";
-      authData = {
-        taiKhoan: values.username,
-        matKhau: values.password,
-        hoTen: values.name,
-        soDT: values.phone,
-        maNhom: values.group,
-        email: values.email,
+      const authData = {
+        username: values.username,
+        password: values.password,
+        nombre: values.nombre,
+        celular: values.celular,
+        grupo: values.grupo,
+        correo: values.correo,
       };
-    }
-    axios
-      .post(url, authData)
+
+      addDoc(collection(db, 'usuarios'), authData)
       .then((response) => {
-        if (isSignUp) {
-          dispatch(authSuccess(response.data, "¡Cuenta creada con éxito!"));
-          history.push("/sign-in");
-        } else {
-          dispatch(authSuccess(response.data, "¡Inicio de sesión con éxito!"));
-          localStorage.setItem("user", JSON.stringify(response.data));
-          history.push("/");
-        }
+        dispatch(authSuccess("Success", "¡Cuenta creada con éxito!"));
+        history.push("/sign-in");
+      })
+      .catch((error) => {
+        dispatch(authFail("Error"));
+      });
+    }else{
+      getDocs(queryAuth)
+      .then((response) => {
+        let result = [];
+        response.forEach((doc) => {
+          result.push({...doc.data(), id:doc.id})
+        });
+        dispatch(authSuccess(result[0], "¡Inicio de sesión con éxito!"));
+        localStorage.setItem("user", JSON.stringify(result[0]));
+        history.push("/");
       })
       .catch((error) => {
         dispatch(authFail(error.response.data));
       });
+    }
   };
 };
 

@@ -74,19 +74,22 @@ export const fetchCourses = (courseType, group, keyWord) => {
     if (group === undefined) {
       group = "GP08";
     }
-    let url = `/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${courseType}&MaNhom=${group}`;
+    let queryCourses = query(collection(db,"cursos") ,  where("courseType", "==", courseType), where("group", "==", group));
     if (courseType === "all") {
-      url = `/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=${group}`;
+      queryCourses = query(collection(db,"cursos") , where("group", "==", group));
     }
     if (keyWord) {
-      url = `/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${keyWord}&MaNhom=${group}`;
+      queryCourses = query(collection(db,"cursos") ,  where("courseName", "==", keyWord), where("group", "==", group));
     }
 
-    axios
-      .get(url)
+    getDocs(queryCourses)
       .then((response) => {
         // console.log("Courses List: ", response.data);
-        dispatch(fetchCoursesSuccess(response.data));
+        let result = [];
+        response.forEach((doc) => {
+          result.push({...doc.data(), id:doc.id})
+        });
+        dispatch(fetchCoursesSuccess(result));
       })
       .catch((error) => {
         dispatch(fetchCoursesFail(error));
@@ -117,11 +120,15 @@ export const fetchCourseDetailFail = (error) => {
 
 export const fetchCourseDetail = (courseId) => {
   return (dispatch) => {
+    const queryCourseDetail = query(collection(db,"cursos") ,  where("courseId", "==", courseId));
     dispatch(fetchCourseDetailStart());
-    axios
-      .get(`/QuanLyKhoaHoc/LayThongTinKhoaHoc?maKhoaHoc=${courseId}`)
+    getDocs(queryCourseDetail)
       .then((response) => {
-        dispatch(fetchCourseDetailSuccess(response.data));
+        let result = [];
+        response.forEach((doc) => {
+          result.push({...doc.data(), id:doc.id})
+        });
+        dispatch(fetchCourseDetailSuccess(result[0]));
       })
       .catch((error) => {
         dispatch(fetchCourseDetailFail(error));

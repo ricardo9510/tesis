@@ -209,7 +209,7 @@ const MenuList = (props) => {
           <Courses />
         </Tooltip>
 
-        {user && user.maLoaiNguoiDung === "GV" ? (
+        {user && user.tipoCuenta === "GV" ? (
           <Fragment>
             <Tooltip title="Gestion Cursos">
               <CoursesManage />

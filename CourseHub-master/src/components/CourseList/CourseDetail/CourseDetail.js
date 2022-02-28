@@ -119,14 +119,14 @@ function CourseDetail(props) {
                 {loading ? (
                   <Skeleton variant="text" width={"100%"} />
                 ) : (
-                  courseDetail.tenKhoaHoc
+                  courseDetail.courseName
                 )}
               </Typography>
               <Typography gutterBottom>
                 {loading ? (
                   <Skeleton variant="text" width={"100%"} />
                 ) : (
-                  courseDetail.moTa
+                  courseDetail.description
                 )}
               </Typography>
               <HoverRating />
@@ -186,7 +186,7 @@ function CourseDetail(props) {
           <ShowcaseCard
             isMe={isMe}
             loading={loading}
-            imageLink={courseDetail.hinhAnh}
+            imageLink={courseDetail.imageUrl}
             courseId={match.params.id}
           />
         </Box>

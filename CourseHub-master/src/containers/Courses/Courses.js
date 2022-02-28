@@ -45,16 +45,16 @@ const Courses = (props) => {
     case "a-z":
       courseList = courseList.slice(0);
       courseList.sort(function (a, b) {
-        var x = a.tenKhoaHoc.toLowerCase();
-        var y = b.tenKhoaHoc.toLowerCase();
+        var x = a.courseName.toLowerCase();
+        var y = b.courseName.toLowerCase();
         return x < y ? -1 : x > y ? 1 : 0;
       });
       break;
     case "z-a":
       courseList = courseList.slice(0);
       courseList.sort(function (a, b) {
-        var y = a.tenKhoaHoc.toLowerCase();
-        var x = b.tenKhoaHoc.toLowerCase();
+        var y = a.courseName.toLowerCase();
+        var x = b.courseName.toLowerCase();
         return x < y ? -1 : x > y ? 1 : 0;
       });
       break;

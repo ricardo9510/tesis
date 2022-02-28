@@ -48,7 +48,7 @@ const RouteAdmin = ({ Component, isAdmin, ...props }) => {
 
 const App = ({ onTryAutoSignup }) => {
   const user = JSON.parse(localStorage.getItem("user"));
-  const isAdmin = user && user.maLoaiNguoiDung === "GV";
+  const isAdmin = user && user.tipoCuenta === "GV";
 
   useEffect(() => {
     onTryAutoSignup();

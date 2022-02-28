@@ -117,7 +117,7 @@ const ShowcaseCard = (props) => {
         </Typography>
       </Box>
 
-      {user && user.accessToken ? (
+      {user && user.nombre ? (
         <Box mx={2}>
           <Button
             size="small"
@@ -135,7 +135,7 @@ const ShowcaseCard = (props) => {
             style={{ textDecoration: "none" }}
           >
             <Button size="small" className={cardStyles.button}>
-              Inicia sesion e inscribite
+              Inicia sesion e inscribete
             </Button>
           </Box>
         </Box>
