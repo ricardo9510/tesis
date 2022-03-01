@@ -169,12 +169,12 @@ export const deleteUserFail = (error) => {
 export const deleteUser = (selectedUser, group) => {
   return (dispatch) => {
     dispatch(deleteUserStart());
-    const user = JSON.parse(localStorage.getItem("user"));
-    const url = `/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${selectedUser.taiKhoan}`;
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${user.accessToken}`,
-    };
+    // const user = JSON.parse(localStorage.getItem("user"));
+    // const url = `/QuanLyNguoiDung/XoaNguoiDung?TaiKhoan=${selectedUser.taiKhoan}`;
+    // const headers = {
+    //   "Content-Type": "application/json",
+    //   Authorization: `Bearer ${user.accessToken}`,
+    // };
     deleteDoc(doc(db, 'usuarios', selectedUser.id)).then(() => {
       console.log("Document successfully deleted!");
       dispatch(deleteUserSuccess(true));

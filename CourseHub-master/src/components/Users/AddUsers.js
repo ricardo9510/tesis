@@ -261,11 +261,11 @@ export const AddUsers = (props) => {
     setSubmitting(false);
   }
 
-  const onSubmit = (values, { setSubmitting, resetForm }) => {
-    onAddUser(values, isEdit, tabIndex, group);
-    resetForm();
-    setSubmitting(false);
-  };
+  // const onSubmit = (values, { setSubmitting, resetForm }) => {
+  //   onAddUser(values, isEdit, tabIndex, group);
+  //   resetForm();
+  //   setSubmitting(false);
+  // };
 
   return (
     <Card className={cx(cardStyles.root, shadowStyles.root)}>

@@ -61,14 +61,14 @@ export const fetchCoursesList = (keyWord, group, courseType) => {
 
   return (dispatch) => {
     let queryFirebase = query(collection(db,"cursos") , where("group", "==", group));
-    let url = `/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=${group}`;
+    //let url = `/QuanLyKhoaHoc/LayDanhSachKhoaHoc?MaNhom=${group}`;
     if (courseType !== "all") {
      queryFirebase = query(collection(db,"cursos") ,  where("courseType", "==", courseType), where("group", "==", group));
-      url = `/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${courseType}&MaNhom=${group}`;
+      //url = `/QuanLyKhoaHoc/LayKhoaHocTheoDanhMuc?maDanhMuc=${courseType}&MaNhom=${group}`;
     }
     if (keyWord) {
       queryFirebase = query(collection(db,"cursos") ,  where("courseName", "==", keyWord), where("group", "==", group));
-      url = `/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${keyWord}&MaNhom=${group}`;
+      //url = `/QuanLyKhoaHoc/LayDanhSachKhoaHoc?tenKhoaHoc=${keyWord}&MaNhom=${group}`;
     }
 
     dispatch(fetchCoursesListStart());
@@ -118,7 +118,7 @@ export const addCourse = (
 ) => {
   return (dispatch) => {
     dispatch(addCourseStart());
-    const user = JSON.parse(localStorage.getItem("user"));
+    //const user = JSON.parse(localStorage.getItem("user"));
     const date = new Date(selectedDate);
     const dateTimeFormat = new Intl.DateTimeFormat("en", {
       year: "numeric",
@@ -134,22 +134,21 @@ export const addCourse = (
     ] = dateTimeFormat.formatToParts(date);
     const dateString = `${day}/${month}/${year}`;
 
-    let method = "post";
-    let url = "/QuanLyKhoaHoc/ThemKhoaHoc";
+    // let method = "post";
+    // let url = "/QuanLyKhoaHoc/ThemKhoaHoc";
     if (isEdit) {
-      method = "put";
-      url = "/QuanLyKhoaHoc/CapNhatKhoaHoc";
+      // method = "put";
+      // url = "/QuanLyKhoaHoc/CapNhatKhoaHoc";
     }
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${user.accessToken}`,
-    };
+    // const headers = {
+    //   "Content-Type": "application/json",
+    //   Authorization: `Bearer ${user.accessToken}`,
+    // };
 
     const data = {
       courseId: values.courseId.trim(),
       courseDescription: values.courseName.trim().replace(/\s+/g, "-").toLowerCase(),
       courseName: values.courseName.trim(),
-      courseType: courseType,
       description: values.detail.trim(),
       views: values.views,
       rate: values.rate,
@@ -483,12 +482,12 @@ export const uploadImageFail = (error) => {
 export const uploadImage = (selectedImage, courseName, group, courseId) => {
   return (dispatch) => {
     dispatch(uploadImageStart());
-    const url = "/QuanLyKhoaHoc/UploadHinhAnhKhoaHoc";
-    const formData = {
-      file: selectedImage.name,
-      courseName: courseName,
-      group: group
-    };
+    // const url = "/QuanLyKhoaHoc/UploadHinhAnhKhoaHoc";
+    // const formData = {
+    //   file: selectedImage.name,
+    //   courseName: courseName,
+    //   group: group
+    // };
 
     const storage = getStorage();
     const mountainImagesRef = ref(storage, selectedImage.name);
@@ -531,12 +530,12 @@ export const deleteCourseFail = (error) => {
 export const deleteCourse = (selectedCourse, keyWord, group, courseType) => {
   return (dispatch) => {
     dispatch(deleteCourseStart());
-    const user = JSON.parse(localStorage.getItem("user"));
-    const url = `/QuanLyKhoaHoc/XoaKhoaHoc?MaKhoaHoc=${selectedCourse.maKhoaHoc}`;
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${user.accessToken}`,
-    };
+    // const user = JSON.parse(localStorage.getItem("user"));
+    // const url = `/QuanLyKhoaHoc/XoaKhoaHoc?MaKhoaHoc=${selectedCourse.maKhoaHoc}`;
+    // const headers = {
+    //   "Content-Type": "application/json",
+    //   Authorization: `Bearer ${user.accessToken}`,
+    // };
     deleteDoc(doc(db, 'cursos', selectedCourse.id))
       .then((response) => {
         // console.log(response.data);

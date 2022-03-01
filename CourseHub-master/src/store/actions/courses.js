@@ -1,6 +1,6 @@
 import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
-import { doc, query, collection, where, getDocs } from "firebase/firestore";
+import { query, collection, where, getDocs } from "firebase/firestore";
 import db from "../../firebase/firebaseConfig";
 
 // ----------------- Course Index ------------------ //

@@ -4,15 +4,15 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { useMediaQuery, Avatar } from "@material-ui/core";
+import { useMediaQuery } from "@material-ui/core";
 import { GridList, GridListTile } from "@material-ui/core";
 import { Grid, Button, Box, Typography, Paper } from "@material-ui/core";
 
-import { LiveTv, AllInclusive, Bookmark } from "@material-ui/icons";
+// import { LiveTv, AllInclusive, Bookmark } from "@material-ui/icons";
 
 import Carousel from "react-material-ui-carousel";
 import Image from "material-ui-image";
-import CountUp from "react-countup";
+// import CountUp from "react-countup";
 
 import { AutoRotatingCarousel, Slide } from "material-auto-rotating-carousel";
 
@@ -152,26 +152,26 @@ const tileData = [
   },
 ];
 
-const featureList = [
-  {
-    icon: <LiveTv />,
-    title: "cursos online",
-    subtitle: "Disfruta de una variedad de temas nuevos.",
-    count: <CountUp end={1000} duration={6} style={{ marginRight: 4 }} />,
-  },
-  {
-    icon: <Bookmark />,
-    title: "Instrucción experta",
-    subtitle: "Encuentra el instructor adecuado para ti",
-    count: null,
-  },
-  {
-    icon: <AllInclusive />,
-    title: "Acceso de por vida",
-    subtitle: "Aprende en tu horario",
-    count: null,
-  },
-];
+// const featureList = [
+//   {
+//     icon: <LiveTv />,
+//     title: "cursos online",
+//     subtitle: "Disfruta de una variedad de temas nuevos.",
+//     count: <CountUp end={1000} duration={6} style={{ marginRight: 4 }} />,
+//   },
+//   {
+//     icon: <Bookmark />,
+//     title: "Instrucción experta",
+//     subtitle: "Encuentra el instructor adecuado para ti",
+//     count: null,
+//   },
+//   {
+//     icon: <AllInclusive />,
+//     title: "Acceso de por vida",
+//     subtitle: "Aprende en tu horario",
+//     count: null,
+//   },
+// ];
 
 const AutoRotatingCarouselModal = ({ handleOpen, setHandleOpen, isMobile }) => {
   return (

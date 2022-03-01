@@ -10,7 +10,6 @@ import VpnKeyIcon from "@material-ui/icons/VpnKey";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import ArchiveIcon from "@material-ui/icons/Archive";
 import SchoolIcon from '@material-ui/icons/School';
 
 import AvatarItem from "../Avatar/AvatarItem";
