@@ -1,0 +1,70 @@
+import React from "react";
+import { connect } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
+import { Grid, Box } from "@material-ui/core";
+
+import CourseList from "../../components/Courses/CourseList";
+import UserList from "../../components/Users/UserList";
+
+const useStyles = makeStyles((theme) => ({
+  list: {
+    flex: 1,
+    minWidth: 390,
+  },
+  detail: {
+    flex: 1,
+    zIndex: 1000,
+    minWidth: 390,
+    overflowY: "auto",
+    background: "linear-gradient(120deg, #009DD9, #17406D)",
+    "@media (min-width: 836px)": {
+      height: "92.4vh",
+    },
+  },
+}));
+
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      {value === index && <Box p={3}>{children}</Box>}
+    </div>
+  );
+}
+
+function CoursesManager({ tabIndex }) {
+  const classes = useStyles();
+
+  return (
+    <Grid container>
+      <Grid item sm={3} className={classes.list}>
+        <Box>
+          <CourseList />
+        </Box>
+      </Grid>
+
+      <Grid item sm={3} className={classes.list}>
+        <TabPanel >
+          <UserList />
+        </TabPanel>
+
+
+      </Grid>
+    </Grid>
+  );
+}
+
+const mapStateToProps = (state) => {
+  return {
+    tabIndex: state.coursesManager.tabIndex,
+  };
+};
+
+export default connect(mapStateToProps)(CoursesManager);

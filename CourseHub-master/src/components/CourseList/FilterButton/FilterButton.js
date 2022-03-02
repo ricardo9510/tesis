@@ -29,7 +29,7 @@ const FilterButton = (props) => {
       size="small"
       className={classes.formControl}
     >
-      <InputLabel>Filtrado por</InputLabel>
+      <InputLabel>Tipo Curso</InputLabel>
       <Select
         value={courseType}
         onChange={(event) => onChangeIndex(event.target.value)}

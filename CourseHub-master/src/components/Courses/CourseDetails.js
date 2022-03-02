@@ -133,7 +133,7 @@ const CourseDetails = (props) => {
       <Box p={2} width={"100%"} className={borderedGridStyles.item}>
         <List dense>
           {userPendingList.map((user, index) => (
-            <ListItem key={user.biDanh} button>
+            <ListItem key={user.id} button>
               <ListItemAvatar>
                 <Avatar
                   alt={`Avatar n°${index + 1}`}
@@ -141,8 +141,8 @@ const CourseDetails = (props) => {
                 />
               </ListItemAvatar>
               <ListItemText
-                id={user.biDanh}
-                primary={user.taiKhoan}
+                id={user.id}
+                primary={user.nombre}
               // style={{ paddingRight: 90 }}
               />
               <ListItemSecondaryAction>
@@ -178,14 +178,14 @@ const CourseDetails = (props) => {
       <Box p={2} width={"100%"} className={borderedGridStyles.item}>
         <List dense>
           {userApprovedList.map((user, index) => (
-            <ListItem key={user.biDanh} button>
+            <ListItem key={user.id} button>
               <ListItemAvatar>
                 <Avatar
                   alt={`Avatar n°${index + 1}`}
                   src={`https://i.pravatar.cc/150?img=${index + 1}`}
                 />
               </ListItemAvatar>
-              <ListItemText id={user.biDanh} primary={user.taiKhoan} />
+              <ListItemText id={user.id} primary={user.nombre} />
               <ListItemSecondaryAction>
                 <IconButton
                   edge="end"
@@ -210,14 +210,14 @@ const CourseDetails = (props) => {
       <Box p={2} width={"100%"} className={borderedGridStyles.item}>
         <List dense>
           {userRefuseList.map((user, index) => (
-            <ListItem key={user.biDanh} button>
+            <ListItem key={user.id} button>
               <ListItemAvatar>
                 <Avatar
                   alt={`Avatar n°${index + 1}`}
                   src={`https://i.pravatar.cc/150?img=${index + 1}`}
                 />
               </ListItemAvatar>
-              <ListItemText id={user.biDanh} primary={user.taiKhoan} />
+              <ListItemText id={user.id} primary={user.nombre} />
               <ListItemSecondaryAction>
                 <IconButton
                   edge="end"
@@ -256,10 +256,10 @@ const CourseDetails = (props) => {
               id="panel1bh-header"
             >
               <Typography className={styles.expanseHeading}>
-                Pending Users
+                Usuarios pendientes
               </Typography>
               <Typography className={styles.secondaryHeading}>
-                These users are waiting to access
+              Estos usuarios están esperando para acceder.
               </Typography>
             </ExpansionPanelSummary>
             <ExpansionPanelDetails>{usersPendingRender}</ExpansionPanelDetails>

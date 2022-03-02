@@ -83,22 +83,22 @@ const ShowcaseCard = (props) => {
   }, [error, success, enqueueSnackbar, onUserClearMessage]);
 
   const infoList = [
-    { icon: <FindInPageIcon fontSize="small" />, text: "1 article" },
+    { icon: <FindInPageIcon fontSize="small" />, text: "1 articulo" },
     {
       icon: <AllInclusiveIcon fontSize="small" />,
-      text: "Full lifetime accesso",
+      text: "Acceso completo de por vida",
     },
     {
       icon: <PhoneIphoneIcon fontSize="small" />,
-      text: "Access on mobile and TV",
+      text: "Acceso en móvil y TV",
     },
     {
       icon: <BuildIcon fontSize="small" />,
-      text: "SkillsFuture Credit eligible",
+      text: "SkillsFuture crédito elegible",
     },
     {
       icon: <VerifiedUserIcon fontSize="small" />,
-      text: "Certificate of Completion",
+      text: "Certificado de Finalización",
     },
   ];
 
@@ -124,7 +124,7 @@ const ShowcaseCard = (props) => {
             onClick={() => onEnroll(courseId, isMe)}
             className={cardStyles.button}
           >
-            {isMe ? "Leave this course" : "Enroll Now"}
+            {isMe ? "Salir del curso" : "Entrar al curso"}
           </Button>
         </Box>
       ) : (

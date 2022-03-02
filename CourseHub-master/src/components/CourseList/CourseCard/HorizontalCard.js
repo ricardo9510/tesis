@@ -47,10 +47,10 @@ const HorizontalCard = ({ course }) => {
             <Grid item xs container direction="column" spacing={2}>
               <Grid item xs>
                 <Typography gutterBottom variant="subtitle1" noWrap>
-                  {course.tenKhoaHoc}
+                  {course.courseName}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
-                  ID: {course.maKhoaHoc}
+                  ID: {course.courseId}
                 </Typography>
               </Grid>
               <Grid item>

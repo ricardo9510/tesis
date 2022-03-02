@@ -13,7 +13,8 @@ import {
   Typography,
 } from "@material-ui/core";
 
-import { Favorite, Share, ExpandMore } from "@material-ui/icons";
+// import { Favorite, Share, ExpandMore } from "@material-ui/icons";
+import { ExpandMore } from "@material-ui/icons";
 
 import { Link } from "react-router-dom";
 
@@ -73,12 +74,12 @@ const CourseCard = ({ course }) => {
       </CardActionArea>
 
       <CardActions disableSpacing>
-        <IconButton aria-label="share">
+        {/* <IconButton aria-label="share">
           <Share />
         </IconButton>
         <IconButton aria-label="add to favorites">
           <Favorite />
-        </IconButton>
+        </IconButton> */}
         <IconButton
           className={clsx(classes.expand, {
             [classes.expandOpen]: expanded,

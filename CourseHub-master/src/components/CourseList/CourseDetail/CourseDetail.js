@@ -13,7 +13,7 @@ import { useN01SwitchStyles } from "@mui-treasury/styles/switch/n01";
 
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 
-import HoverRating from "../../Rating/Rating";
+// import HoverRating from "../../Rating/Rating";
 import CourseTabs from "./CourseTabs/CourseTabs";
 import ShowcaseCard from "../CourseCard/ShowcaseCard";
 
@@ -49,9 +49,14 @@ function CourseDetail(props) {
   const switchStyles = useN01SwitchStyles();
   const [onShow, setOnShow] = useState(false);
 
-  let nguoiTao;
-  if (courseDetail.nguoiTao) {
-    nguoiTao = courseDetail.nguoiTao.hoTen;
+  // let nguoiTao;
+  // if (courseDetail.nguoiTao) {
+  //   nguoiTao = courseDetail.nguoiTao.hoTen;
+  // }
+
+  let creator;
+  if (courseDetail.creator) {
+    creator = courseDetail.creator;
   }
 
   useEffect(() => {
@@ -129,15 +134,16 @@ function CourseDetail(props) {
                   courseDetail.description
                 )}
               </Typography>
-              <HoverRating />
+              {/* <HoverRating /> */}{/*las estrellas*/}
+              
 
               <Box>
                 {loading ? (
                   <Skeleton variant="text" width={"50%"} />
                 ) : (
                   <Grid container alignItems="center">
-                    <Box mr={3}>Created by {nguoiTao}</Box>
-                    <Box>Last updated {courseDetail.ngayTao}</Box>
+                    <Box mr={3}>Creado por: {creator}</Box>
+                    {/* <Box>Actualizado {courseDetail.ngayTao}</Box> */}
                   </Grid>
                 )}
               </Box>
@@ -158,7 +164,7 @@ function CourseDetail(props) {
                             ? userList.lstHocVien.length
                             : "0"}
                         </Box>
-                        <Typography>Enerolled</Typography>
+                        <Typography>Inscrito</Typography>
                       </Box>
                       {userListRender}
                       <Tooltip title="Show All">

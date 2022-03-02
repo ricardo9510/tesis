@@ -172,7 +172,6 @@ export const fetchUserDetail = () => {
 
     axios({ method: "post", url, headers, data })
       .then((response) => {
-        // console.log("User Detail: ", response.data);
         dispatch(fetchUserDetailSuccess(response.data));
       })
       .catch((error) => {

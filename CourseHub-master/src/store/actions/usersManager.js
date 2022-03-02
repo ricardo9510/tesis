@@ -93,7 +93,7 @@ export const fetchUsers = (group) => {
             return {...documento.data(), id: documento.id}
           })
     
-          if(arregloUsuarios.length == 0)
+          if(arregloUsuarios.length === 0)
             dispatch(fetchUsersFail(new Error("No se encontró los usuarios")))
           dispatch(fetchUsersSuccess(arregloUsuarios));
         }

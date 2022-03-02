@@ -1,8 +1,9 @@
-import axios from "../../axios";
 import * as actionTypes from "./actionTypes";
 import {addDoc, collection, deleteDoc, doc, getDocs, query, updateDoc, where} from "firebase/firestore";
 import db from "../../firebase/firebaseConfig";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { defaultTo, get, set } from "lodash";
+import { isEmptyArray } from "formik";
 
 export const fetchUsersClick = (selectedCourse, tabIndex) => {
   return {
@@ -247,26 +248,23 @@ export const fetchUserListOfCourseFail = (error) => {
 export const fetchUserListOfCourse = (course) => {
   return (dispatch) => {
     dispatch(fetchUserListOfCourseStart());
-    const user = JSON.parse(localStorage.getItem("user"));
-    let method = "post";
-    let url = "/QuanLyNguoiDung/LayDanhSachHocVienKhoaHoc";
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${user.accessToken}`,
-    };
-    const data = {
-      maKhoaHoc: course.maKhoaHoc,
-    };
+    if (isEmptyArray(defaultTo(course.usersSuccess, []))) {
+      dispatch(fetchUserListOfCourseSuccess([]));
+    }else{
+      let queryUsers = query(collection(db,"usuarios") , where("__name__", "in", defaultTo(course.usersSuccess, [])));
 
-    axios({ method, url, headers, data })
+    getDocs(queryUsers)
       .then((response) => {
-        // console.log(response.data);
-        dispatch(fetchUserListOfCourseSuccess(response.data));
+        let result = [];
+        response.forEach((doc) => {
+          result.push({...doc.data(), id:doc.id})
+        });
+        dispatch(fetchUserListOfCourseSuccess(result));
       })
       .catch((error) => {
-        console.log(error);
         dispatch(fetchUserListOfCourseFail(error.response.data));
       });
+    }
   };
 };
 
@@ -293,26 +291,23 @@ export const fetchUserPendingListOfCourseFail = (error) => {
 export const fetchUserPendingListOfCourse = (course) => {
   return (dispatch) => {
     dispatch(fetchUserPendingListOfCourseStart());
-    const user = JSON.parse(localStorage.getItem("user"));
-    let method = "post";
-    let url = "/QuanLyNguoiDung/LayDanhSachHocVienChoXetDuyet";
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${user.accessToken}`,
-    };
-    const data = {
-      maKhoaHoc: course.maKhoaHoc,
-    };
+    if (isEmptyArray(defaultTo(course.usersPending, []))) {
+      dispatch(fetchUserListOfCourseSuccess([]));
+    }else{
+      let queryUsersPending = query(collection(db,"usuarios") , where("__name__", "in", defaultTo(course.usersPending, [])));
 
-    axios({ method, url, headers, data })
+      getDocs(queryUsersPending)
       .then((response) => {
-        // console.log(response.data);
-        dispatch(fetchUserPendingListOfCourseSuccess(response.data));
+        let result = [];
+        response.forEach((doc) => {
+          result.push({...doc.data(), id:doc.id})
+        });
+        dispatch(fetchUserPendingListOfCourseSuccess(result));
       })
       .catch((error) => {
-        console.log(error.response.data);
-        dispatch(fetchUserPendingListOfCourseFail(error.response.data));
+        dispatch(fetchUserPendingListOfCourseFail(error));
       });
+    } 
   };
 };
 
@@ -339,26 +334,23 @@ export const fetchUserRefuseListOfCourseFail = (error) => {
 export const fetchUserRefuseListOfCourse = (course) => {
   return (dispatch) => {
     dispatch(fetchUserRefuseListOfCourseStart());
-    const user = JSON.parse(localStorage.getItem("user"));
-    let method = "post";
-    let url = "/QuanLyNguoiDung/LayDanhSachNguoiDungChuaGhiDanh";
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${user.accessToken}`,
-    };
-    const data = {
-      maKhoaHoc: course.maKhoaHoc,
-    };
+    if (isEmptyArray(defaultTo(course.usersRefuse, []))) {
+      dispatch(fetchUserListOfCourseSuccess([]));
+    }else {
+      let queryUsersRefuse = query(collection(db,"usuarios") , where("__name__", "in", defaultTo(course.usersRefuse, [])));
 
-    axios({ method, url, headers, data })
+    getDocs(queryUsersRefuse)
       .then((response) => {
-        // console.log(response.data);
-        dispatch(fetchUserRefuseListOfCourseSuccess(response.data));
+        let result = [];
+        response.forEach((doc) => {
+          result.push({...doc.data(), id:doc.id})
+        });
+        dispatch(fetchUserRefuseListOfCourseSuccess(result));
       })
       .catch((error) => {
-        console.log(error.response.data);
-        dispatch(fetchUserRefuseListOfCourseFail(error.response.data));
+        dispatch(fetchUserRefuseListOfCourseFail(error));
       });
+    }
   };
 };
 
@@ -385,21 +377,22 @@ export const approveUserPendingFail = (error) => {
 export const approveUserPending = (selectedCourse, selectedUser) => {
   return (dispatch) => {
     dispatch(approveUserPendingStart());
-    const user = JSON.parse(localStorage.getItem("user"));
-    const url = "/QuanLyKhoaHoc/GhiDanhKhoaHoc";
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${user.accessToken}`,
-    };
-    const data = {
-      maKhoaHoc: selectedCourse.maKhoaHoc,
-      taiKhoan: selectedUser.taiKhoan,
-    };
+    let path = "usersRefuse";
+    if(selectedCourse.usersPending.includes(selectedUser.id))
+      path = "usersPending";
+    const usersPendOrRefuseRequest = get(selectedCourse, path, []).filter((course)=> course !== selectedUser.id);
+    const usersSuccessRequest = selectedCourse.usersSuccess;
+    usersSuccessRequest.push(selectedUser.id);
+    selectedCourse = {...selectedCourse, usersSuccess: usersSuccessRequest};
+    set(selectedCourse, path, usersPendOrRefuseRequest);
+    let updateObject = {};
+    set(updateObject, path, usersPendOrRefuseRequest);
+    set(updateObject, "usersSuccess", usersSuccessRequest);
 
-    axios({ method: "post", url, headers, data })
+    updateDoc(doc(db, 'cursos', selectedCourse.id), updateObject)
       .then((response) => {
         // console.log(response.data);
-        dispatch(approveUserPendingSuccess(response.data));
+        dispatch(approveUserPendingSuccess("Success"));
         if (selectedCourse) {
           dispatch(fetchUserPendingListOfCourse(selectedCourse));
           dispatch(fetchUserListOfCourse(selectedCourse));
@@ -436,22 +429,25 @@ export const disapproveUserFail = (error) => {
 export const disapproveUser = (selectedCourse, selectedUser) => {
   return (dispatch) => {
     dispatch(disapproveUserStart());
-    const user = JSON.parse(localStorage.getItem("user"));
-    const url = "/QuanLyKhoaHoc/HuyGhiDanh";
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${user.accessToken}`,
-    };
-    const data = {
-      maKhoaHoc: selectedCourse.maKhoaHoc,
-      taiKhoan: selectedUser.taiKhoan,
-    };
-    axios({ method: "post", url, headers, data })
+    let path = "usersSuccess";
+    if(selectedCourse.usersPending.includes(selectedUser.id))
+      path = "usersPending";
+    const usersPendOrSuccRequest = get(selectedCourse, path, []).filter((course)=> course !== selectedUser.id);
+    const usersRefuseRequest = selectedCourse.usersRefuse;
+    usersRefuseRequest.push(selectedUser.id);
+    selectedCourse = {...selectedCourse, usersRefuse: usersRefuseRequest};
+    set(selectedCourse, path, usersPendOrSuccRequest);
+    let updateObject = {};
+    set(updateObject, path, usersPendOrSuccRequest);
+    set(updateObject, "usersRefuse", usersRefuseRequest);
+
+    updateDoc(doc(db, 'cursos', selectedCourse.id), updateObject)
       .then((response) => {
         // console.log("Banned message: ", response.data);
-        dispatch(disapproveUserSuccess(response.data));
+        dispatch(disapproveUserSuccess("Success"));
         dispatch(fetchUserListOfCourse(selectedCourse));
         dispatch(fetchUserPendingListOfCourse(selectedCourse));
+        dispatch(fetchUserRefuseListOfCourse(selectedCourse));
       })
       .catch((error) => {
         dispatch(disapproveUserFail(error.response.data));

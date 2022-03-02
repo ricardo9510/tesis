@@ -45,7 +45,6 @@ function CourseList(props) {
   const [tabNum, setTabNum] = useState(0);
   const { courseIndex, courseList, loading } = props;
   const { onfetchCourseIndex, onfetchCourses } = props;
-
   useEffect(() => {
     onfetchCourseIndex(true);
   }, [onfetchCourseIndex]);

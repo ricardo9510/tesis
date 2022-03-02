@@ -187,7 +187,7 @@ export const Auth = (props) => {
         .required("Se requiere confirmar contraseña"),
       nombre: Yup.string()
         .min(3, "El nombre debe tener al menos 3 caracteres")
-        .max(15, "El nombre debe tener 15 caracteres o menos")
+        .max(20, "El nombre debe tener 20 caracteres o menos")
         .required("Debe ingresar un nombre"),
       grupo: Yup.string().required("Se requiere grupo"),
       celular: Yup.number()

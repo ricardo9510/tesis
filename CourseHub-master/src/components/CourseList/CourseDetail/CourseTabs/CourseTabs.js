@@ -58,31 +58,31 @@ const CourseTabs = () => {
       >
         <GmailTabItem
           icon={<Inbox />}
-          label={"Overview"}
+          label={"Resumen"}
           {...a11yProps(0)}
           classes={{ wrapper: classes.wrapper }}
         />
         <GmailTabItem
           icon={<People />}
-          label={"Curriculum"}
+          label={"Plan de estudios"}
           {...a11yProps(1)}
           classes={{ wrapper: classes.wrapper }}
         />
         <GmailTabItem
           icon={<LocalOffer />}
-          label={"FAQ"}
+          label={"Preguntas"}
           {...a11yProps(2)}
           classes={{ wrapper: classes.wrapper }}
         />
         <GmailTabItem
           icon={<Info />}
-          label={"Announcement"}
+          label={"Anuncio"}
           {...a11yProps(3)}
           classes={{ wrapper: classes.wrapper }}
         />
         <GmailTabItem
           icon={<Info />}
-          label={"Reviews"}
+          label={"Reseñas"}
           {...a11yProps(4)}
           classes={{ wrapper: classes.wrapper }}
         />
@@ -99,15 +99,15 @@ const CourseTabs = () => {
           </TabPanel>
 
           <TabPanel tabNum={tabNum} index={2}>
-            FAQ
+            Preguntas frecuentes
           </TabPanel>
 
           <TabPanel tabNum={tabNum} index={3}>
-            Announcement
+            Anuncio
           </TabPanel>
 
           <TabPanel tabNum={tabNum} index={4}>
-            Reviews
+            Reseñas
           </TabPanel>
         </Paper>
       </Box>

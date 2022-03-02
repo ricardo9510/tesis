@@ -17,7 +17,7 @@ const SearchBarCustom = ({ onChangeKeyWord }) => {
   return (
     <form className={classes.root} noValidate autoComplete="off">
       <TextField
-        label="Search courses"
+        label="Buscar cursos"
         type="search"
         size="small"
         variant="outlined"
