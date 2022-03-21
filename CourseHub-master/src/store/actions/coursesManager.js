@@ -388,6 +388,8 @@ export const approveUserPending = (selectedCourse, selectedUser) => {
     let updateObject = {};
     set(updateObject, path, usersPendOrRefuseRequest);
     set(updateObject, "usersSuccess", usersSuccessRequest);
+    set(selectedCourse, "usersSuccess", usersSuccessRequest);
+    set(selectedCourse, path, usersPendOrRefuseRequest);
 
     updateDoc(doc(db, 'cursos', selectedCourse.id), updateObject)
       .then((response) => {
@@ -398,6 +400,21 @@ export const approveUserPending = (selectedCourse, selectedUser) => {
           dispatch(fetchUserListOfCourse(selectedCourse));
           dispatch(fetchUserRefuseListOfCourse(selectedCourse));
         }
+      })
+      .catch((error) => {
+        // console.log(error);
+        dispatch(approveUserPendingFail(error.response.data));
+      });
+  };
+};
+
+export const savePrice = (selectedCourse, selectedUser) => {
+  return (dispatch) => {
+    updateDoc(doc(db, 'usuarios', selectedUser.id), selectedUser)
+      .then((response) => {
+        // console.log(response.data);
+        dispatch(approveUserPendingSuccess("Success"));
+        dispatch(fetchUserListOfCourse(selectedCourse));
       })
       .catch((error) => {
         // console.log(error);
@@ -440,6 +457,8 @@ export const disapproveUser = (selectedCourse, selectedUser) => {
     let updateObject = {};
     set(updateObject, path, usersPendOrSuccRequest);
     set(updateObject, "usersRefuse", usersRefuseRequest);
+    set(selectedCourse, "usersRefuse", usersRefuseRequest);
+    set(selectedCourse, path, usersPendOrSuccRequest);
 
     updateDoc(doc(db, 'cursos', selectedCourse.id), updateObject)
       .then((response) => {

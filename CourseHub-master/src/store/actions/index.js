@@ -50,4 +50,5 @@ export {
   chooseCourseType,
   addCourse,
   deleteCourse,
+  savePrice,
 } from "./coursesManager";

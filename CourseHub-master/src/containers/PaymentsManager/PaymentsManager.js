@@ -2,9 +2,9 @@ import React from "react";
 import { connect } from "react-redux";
 import { makeStyles } from "@material-ui/core/styles";
 import { Grid, Box } from "@material-ui/core";
+import CourseListNew from "../../components/Courses/CourseListNew";
+import CourseDetailsNew from "../../components/Courses/CourseDetailsNew";
 
-import CourseList from "../../components/Courses/CourseList";
-import UserList from "../../components/Users/UserList";
 
 const useStyles = makeStyles((theme) => ({
   list: {
@@ -39,23 +39,24 @@ function TabPanel(props) {
   );
 }
 
-function CoursesManager({ tabIndex }) {
+function PaymentsManager({ tabIndex }) {
   const classes = useStyles();
 
   return (
     <Grid container>
-      <Grid item sm={3} className={classes.list}>
+      <Grid item className={classes.list}>
         <Box>
-          <CourseList />
+          <CourseListNew />
         </Box>
       </Grid>
 
-      <Grid item sm={3} className={classes.list}>
-        <TabPanel >
-          <UserList />
+      <Grid item className={classes.detail}>
+        <TabPanel value={tabIndex} index={-2}>
+          <CourseDetailsNew />
         </TabPanel>
-
-
+        <TabPanel value={tabIndex} index={2}>
+          <CourseDetailsNew />
+        </TabPanel>
       </Grid>
     </Grid>
   );
@@ -63,8 +64,8 @@ function CoursesManager({ tabIndex }) {
 
 const mapStateToProps = (state) => {
   return {
-    tabIndex: state.coursesManager.tabIndex,
+    tabIndex: state.paymentsManager.tabIndex,
   };
 };
 
-export default connect(mapStateToProps)(CoursesManager);
+export default connect(mapStateToProps)(PaymentsManager);

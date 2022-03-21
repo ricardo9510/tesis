@@ -14,6 +14,7 @@ import auth from "./store/reducers/auth";
 import user from "./store/reducers/user";
 import usersManager from "./store/reducers/usersManager";
 import coursesManager from "./store/reducers/coursesManager";
+import paymentsManager from "./store/reducers/paymentsManager";
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -24,6 +25,7 @@ const rootReducer = combineReducers({
   courses,
   usersManager,
   coursesManager,
+  paymentsManager,
 });
 
 const store = createStore(
