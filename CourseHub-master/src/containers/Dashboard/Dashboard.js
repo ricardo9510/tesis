@@ -247,10 +247,10 @@ function Dashboard({ darkTheme }) {
       <Grid container alignItems="center" className={classes.header}>
         <Grid item className={classes.heroText}>
           <Typography variant="h4" gutterBottom>
-            Aprende HTML , CSS , Web Apps & Mas
+            CENTRO DE FORMACIÓN CONTÍNUA MAYA
           </Typography>
           <Typography variant="subtitle1" gutterBottom>
-            Aprenda a crear sitios web & aplicaciones. Escriba un código o inicie un negocio
+            Ingresa al mundo del aprendizaje permanente
           </Typography>
           <Button variant="contained" color="primary" onClick={handleClick}>
             Hacer un tour
@@ -268,10 +268,10 @@ function Dashboard({ darkTheme }) {
       <Box my={5} style={{ minHeight: 520 }}>
         <Box mx={6} py={3}>
           <Typography variant="h5" gutterBottom>
-            <strong>Descubre el aprendizaje permanente</strong>
+            <strong>Servicios educativos a tu disposición</strong>
           </Typography>
           <Typography variant="subtitle1" gutterBottom>
-            Elije los cursos que mas te gusten
+            Elige los cursos que más te gusten
           </Typography>
         </Box>
         <CourseList />
@@ -289,12 +289,12 @@ function Dashboard({ darkTheme }) {
           <Box mx={5} minWidth={315} alignSelf="center">
             <Box>
               <Typography variant="h4" color="inherit">
-                Elije e inscribite en tus sus cursos favoritos
+                Elige e inscríbete en tus cursos favoritos
               </Typography>
             </Box>
             <Box mt={3}>
               <Typography>
-                Simplemente regístrate en Preuniversitario MAYA para comenzar a estudiar y recibir certificados.
+                Simplemente regístrate en el Centro de Formación Contínua MAYA. Comienza a estudiar y recibe tu certificación.
               </Typography>
             </Box>
             {user ? null : (
@@ -353,10 +353,10 @@ function Dashboard({ darkTheme }) {
             <Box display="flex">
               <Box ml={1} display="flex" flexDirection="column">
                 <Typography variant="h4">
-                  Fácil de buscar el curso que desea aprender
+                  Busca fácilmente el curso que deseas aprender
                 </Typography>
                 <Typography style={{ marginTop: 16 }}>
-                  Preuniversitario MAYA tiene muchos cursos a tu disposición. Las personas que ingresan
+                  El Centro de Formación Contínua MAYA tiene muchos cursos a tu disposición. Las personas que ingresan
                   tienen acceso a toda la información y recursos de los cursos seleccionado.
                 </Typography>
               </Box>
@@ -370,7 +370,7 @@ function Dashboard({ darkTheme }) {
                   Profesores de excelencia
                 </Typography>
                 <Typography style={{ marginTop: 16 }}>
-                  En Preuniversitario MAYA contamos con un equipo dinámico, responsable e innovador que son profesores y formadores 
+                  El Centro de Formación Contínua MAYA cuenta con un equipo dinámico, responsable e innovador. Profesores y formadores 
                   de empresas y corporaciones experimentadas.
                 </Typography>
               </Box>
@@ -384,8 +384,8 @@ function Dashboard({ darkTheme }) {
                   Adquiere tus nuevas habilidades deseadas
                 </Typography>
                 <Typography style={{ marginTop: 16 }}>
-                  El aplicativo web Preuniversitario MAYA está construido meticulosamente para mejorar la
-                  interacción entre alumnos y profesores. Proporciona un experiencia auténtica y fácil de adquirir conocimientos.
+                  El aplicativo web del Centro de Formación Contínua MAYA está construido meticulosamente para mejorar la
+                  interacción entre estudiantes y profesores. Proporciona una experiencia auténtica y facilita la adquisición de nuevos conocimientos.
                 </Typography>
               </Box>
             </Box>
@@ -417,11 +417,11 @@ function Dashboard({ darkTheme }) {
           <Box mx={5} mt={20} minWidth={315} alignSelf="center">
             <Box>
               <Typography variant="h4" color="inherit">
-                Un montón de temas te están esperando
+                El mundo del conocimiento espera por tí
               </Typography>
             </Box>
             <Box mt={3}>
-              <Typography>¿Que estas esperando? ¡Únete a nosotros ahora!</Typography>
+              <Typography>¿Qué estás esperando?... ¡Únete a nosotros ahora!</Typography>
             </Box>
             {user ? null : (
               <Box mt={2}>

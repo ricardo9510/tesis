@@ -22,7 +22,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
-import { AttachMoney } from "@material-ui/icons";
+import { BorderColor } from "@material-ui/icons";
 
 import IconButton from "@material-ui/core/IconButton";
 
@@ -142,10 +142,10 @@ const CourseDetails = (props) => {
               <ListItemText id={user.id} primary={user.nombre} />
               <ListItemSecondaryAction>
                 <form>
-                  <TextField id="standard-search" label="Number" defaultValue={get(user,  `${"price"+selectedCourse.courseName}`)} onChange={(event) => { set(user, `${"price"+selectedCourse.courseName}`, event.target.value)}} type="text" InputProps={{
+                  <TextField id="standard-search" label="Number" defaultValue={get(user,  `${"score"+selectedCourse.courseName}`)} onChange={(event) => { set(user, `${"score"+selectedCourse.courseName}`, event.target.value)}} type="number" InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <AttachMoney />
+                        <BorderColor />
                       </InputAdornment>
                     ),
                   }} />

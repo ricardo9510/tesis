@@ -14,6 +14,7 @@ import Logout from "./containers/Auth/Logout/Logout";
 import UsersManager from "./containers/UsersManager/UsersManager";
 import CoursesManager from "./containers/CoursesManager/CoursesManager";
 import PaymentsManager from "./containers/PaymentsManager/PaymentsManager";
+import ScoresManager from "./containers/ScoresManager/ScoresManager";
 import PageNotFound from "./containers/PageNotFound/PageNotFound";
 import About from "./containers/Auth/About/About";
 
@@ -78,6 +79,11 @@ const App = ({ onTryAutoSignup }) => {
         <RouteAdmin
           path="/payments-management"
           Component={PaymentsManager}
+          isAdmin={isAdmin}
+        />
+        <RouteAdmin
+          path="/scores-management"
+          Component={ScoresManager}
           isAdmin={isAdmin}
         />
         {/* Without Layout */}

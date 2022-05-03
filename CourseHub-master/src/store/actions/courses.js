@@ -2,6 +2,7 @@ import * as actionTypes from "./actionTypes";
 import axios from "../../axios";
 import { query, collection, where, getDocs } from "firebase/firestore";
 import db from "../../firebase/firebaseConfig";
+import { get } from "lodash";
 
 // ----------------- Course Index ------------------ //
 export const fetchCourseIndexStart = () => {
@@ -30,12 +31,12 @@ export const fetchCourseIndex = (init) => {
     axios
       .get("/QuanLyKhoaHoc/LayDanhMucKhoaHoc")
       .then((response) => {
-        const mapCursos = [{maDanhMuc: 'BackEnd', tenDanhMuc: 'Programación BackEnd'},
-         {maDanhMuc: 'Design', tenDanhMuc: 'Diseño Web'},
-         {maDanhMuc: 'DiDong', tenDanhMuc: 'Programacion Movil'},
-         {maDanhMuc: 'FrontEnd', tenDanhMuc: ' Programacion Front End'},  
-         {maDanhMuc: 'FullStack', tenDanhMuc: 'Programacion Full Stack'},
-         {maDanhMuc: 'TuDuy', tenDanhMuc: 'Logica de Programación'}];
+        const mapCursos = [{maDanhMuc: 'BackEnd', tenDanhMuc: 'Preuniversitario'},
+         {maDanhMuc: 'Design', tenDanhMuc: 'Programación'},
+         {maDanhMuc: 'DiDong', tenDanhMuc: 'Educación Secundaria'},
+         {maDanhMuc: 'FrontEnd', tenDanhMuc: 'Educación Infantil'},  
+         {maDanhMuc: 'FullStack', tenDanhMuc: 'Idiomas'},
+         {maDanhMuc: 'TuDuy', tenDanhMuc: 'Diseño Gráfico'}];
         dispatch(fetchCourseIndexSuccess(mapCursos));
         if (init) {
           dispatch(fetchCourses(mapCursos[0].maDanhMuc));
@@ -160,19 +161,19 @@ export const fetchUserDetailFail = (error) => {
 export const fetchUserDetail = () => {
   return (dispatch) => {
     dispatch(fetchUserDetailStart());
+    let queryFirebase = query(collection(db, "cursos"));
     const user = JSON.parse(localStorage.getItem("user"));
-    const url = "/QuanLyNguoiDung/ThongTinTaiKhoan";
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${user.accessToken}`,
-    };
-    const data = {
-      taiKhoan: user.taiKhoan,
-    };
 
-    axios({ method: "post", url, headers, data })
+    getDocs(queryFirebase)
       .then((response) => {
-        dispatch(fetchUserDetailSuccess(response.data));
+        let result = [];
+        response.forEach((doc) => {
+          result.push({ ...doc.data(), id: doc.id })
+        });
+        let resultFinal = result.filter(courseFilter =>
+          get(courseFilter, "usersSuccess", []).includes(user.id)
+        );
+        dispatch(fetchUserDetailSuccess(resultFinal));
       })
       .catch((error) => {
         dispatch(fetchUserDetailFail(error));

@@ -192,7 +192,7 @@ export const addCourse = (
             dispatch(addCourseFail(error.response));
           });
     }else{
-      addDoc(collection(db, 'cursos'), data)
+      addDoc(collection(db, 'cursos'), {...data, usersSuccess: [], usersPending: [], usersRefuse: []})
           .then((response) => {
             let message = `Creación del nuevo curso ${data.courseName} con exito`;
             if (isEdit) {

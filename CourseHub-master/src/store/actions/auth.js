@@ -58,7 +58,7 @@ export const auth = (values, history, isSignUp) => {
         history.push("/");
       })
       .catch((error) => {
-        dispatch(authFail(error.response.data));
+        dispatch(authFail("Error al ingresar los datos del usuario"));
       });
     }
   };

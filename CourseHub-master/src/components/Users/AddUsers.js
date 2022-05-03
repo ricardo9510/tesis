@@ -127,8 +127,8 @@ const FormikSelect = ({ label, name, items, disabled }) => {
 };
 
 const userTypeItems = [
-  { label: "Estudiante", value: "HV" },
-  { label: "Profesor", value: "GV" },
+  { label: "Usuario", value: "HV" },
+  { label: "Administrador", value: "GV" },
 ];
 
 const userItems = [
@@ -205,14 +205,14 @@ export const AddUsers = (props) => {
   let validationSchema = Yup.object().shape({
     username: Yup.string()
       .min(3, "El nombre de usuario debe tener al menos 3 caracteres")
-      .max(15, "El nombre de usuario debe tener 15 caracteres o menos")
+      .max(20, "El nombre de usuario debe tener 15 caracteres o menos")
       .required("Debe ingresar nombre de usuario"),
     password: Yup.string()
       .min(3, "La contraseña debe tener al menos 3 caracteres")
       .required("Debe ingresar contraseña"),
     name: Yup.string()
       .min(3, "El nombre debe tener al menos 3 caracteres")
-      .max(15, "El nombre debe tener 15 caracteres o menos")
+      .max(30, "El nombre debe tener 30 caracteres o menos")
       .required("Debe ingresar nombre"),
     accountType: Yup.string().required("Tipo de cuenta es requeido"),
     group: Yup.string().required("Group is required"),

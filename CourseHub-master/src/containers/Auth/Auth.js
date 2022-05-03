@@ -157,7 +157,7 @@ export const Auth = (props) => {
   let validationSchema = Yup.object().shape({
     username: Yup.string()
       .min(3, "El nombre debe tener al menos 3 caracteres ")
-      .max(15, "El nombre debe tener 15 caracteres o menos")
+      .max(20, "El nombre debe tener 20 caracteres o menos")
       .required("Must enter a name"),
     password: Yup.string()
       .min(3, "La contraseña debe tener al menos 3 caracteres")
@@ -187,7 +187,7 @@ export const Auth = (props) => {
         .required("Se requiere confirmar contraseña"),
       nombre: Yup.string()
         .min(3, "El nombre debe tener al menos 3 caracteres")
-        .max(20, "El nombre debe tener 20 caracteres o menos")
+        .max(30, "El nombre debe tener 30 caracteres o menos")
         .required("Debe ingresar un nombre"),
       grupo: Yup.string().required("Se requiere grupo"),
       celular: Yup.number()

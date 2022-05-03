@@ -138,14 +138,14 @@ const UserDetails = (props) => {
       <Box p={2} width={"100%"} className={borderedGridStyles.item}>
         <List dense>
           {coursesPendingList.map((course, index) => (
-            <ListItem key={`${course.maKhoaHoc}${index}`}>
+            <ListItem key={`${course.id}${index}`}>
               <ListItemAvatar>
                 <Avatar>
                   <FolderIcon />
                 </Avatar>
               </ListItemAvatar>
               <ListItemText
-                primary={course.tenKhoaHoc}
+                primary={course.courseName}
                 style={{ paddingRight: 60 }}
               />
               <ListItemSecondaryAction>
@@ -153,7 +153,7 @@ const UserDetails = (props) => {
                   edge="end"
                   aria-label="allow"
                   onClick={() =>
-                    onApproveCoursePending(course.maKhoaHoc, selectedUser)
+                    onApproveCoursePending(course.id, selectedUser)
                   }
                 >
                   <Tooltip title="Approve" placement="left">
@@ -164,7 +164,7 @@ const UserDetails = (props) => {
                   edge="end"
                   aria-label="quickAllow"
                   onClick={() =>
-                    onDisapproveCourse(course.maKhoaHoc, selectedUser)
+                    onDisapproveCourse(course.id, selectedUser)
                   }
                 >
                   <Tooltip title="Ban" placement="right">
@@ -185,19 +185,19 @@ const UserDetails = (props) => {
       <Box p={2} width={"100%"} className={borderedGridStyles.item}>
         <List dense>
           {coursesApprovedList.map((course, index) => (
-            <ListItem key={`${course.maKhoaHoc}${index}`}>
+            <ListItem key={`${course.id}${index}`}>
               <ListItemAvatar>
                 <Avatar>
                   <FolderSharedIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary={course.tenKhoaHoc} />
+              <ListItemText primary={course.courseName} />
               <ListItemSecondaryAction>
                 <IconButton
                   edge="end"
                   aria-label="quickAllow"
                   onClick={() =>
-                    onDisapproveCourse(course.maKhoaHoc, selectedUser)
+                    onDisapproveCourse(course.id, selectedUser)
                   }
                 >
                   <Tooltip title="Ban" placement="right">
@@ -218,19 +218,19 @@ const UserDetails = (props) => {
       <Box p={2} width={"100%"} className={borderedGridStyles.item}>
         <List dense>
           {coursesNoneEnrollList.map((course, index) => (
-            <ListItem key={`${course.maKhoaHoc}${index}`}>
+            <ListItem key={`${course.courseId}${index}`}>
               <ListItemAvatar>
                 <Avatar>
                   <FolderIcon />
                 </Avatar>
               </ListItemAvatar>
-              <ListItemText primary={course.tenKhoaHoc} />
+              <ListItemText primary={course.courseName} />
               <ListItemSecondaryAction>
                 <IconButton
                   edge="end"
                   aria-label="block"
                   onClick={() =>
-                    onApproveCoursePending(course.maKhoaHoc, selectedUser)
+                    onApproveCoursePending(course.id, selectedUser)
                   }
                 >
                   <Tooltip title="Approve" placement="right">

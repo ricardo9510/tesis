@@ -18,6 +18,7 @@ import {
   ViewList,
   Payment,
   Layers,
+  Assessment,
 } from "@material-ui/icons";
 
 import GmailSidebarItem from "@mui-treasury/components/sidebarItem/gmail";
@@ -142,6 +143,25 @@ const MenuList = (props) => {
     );
   });
 
+  const ScoresManage = React.forwardRef(function MyComponent(props, ref) {
+    //  Extienda los accesorios al elemento DOM subyacente. 
+    return (
+      <div {...props} ref={ref}>
+        <Link to="/scores-management" className={classes.navlink}>
+          <GmailSidebarItem
+            classes={{ collapsed: classes.collapsed, root: classes.root }}
+            color={"#44AD95"}
+            startIcon={<Assessment className={classes.navIcon} />}
+            label={"Gestion Notas"}
+            amount={""}
+            {...commonProps("/scores-management")}
+            dotOnCollapsed={true}
+          />
+        </Link>
+      </div>
+    );
+  });
+
   const StudentsManage = React.forwardRef(function MyComponent(props, ref) {
     //  Spread the props to the underlying DOM element.
     return (
@@ -222,6 +242,11 @@ const MenuList = (props) => {
             <Tooltip title="Gestion Pagos">
               <PaymentsManage />
             </Tooltip>
+
+            <Tooltip title="Gestion Notas">
+              <ScoresManage />
+            </Tooltip>
+
 
           </Fragment>
         ) : null}

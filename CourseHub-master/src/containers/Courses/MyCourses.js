@@ -119,33 +119,23 @@ const Courses = (props) => {
 
   let courseListRender = <Spinner />;
 
-  if (isMe && userDetail && userDetail.chiTietKhoaHocGhiDanh) {
+  if (isMe && userDetail && userDetail) {
     courseListRender = (
       <Box my={5} mx={2}>
         <List dense>
-          {userDetail.chiTietKhoaHocGhiDanh.map((course, index) => (
-            <ListItem key={`${course.maKhoaHoc}${index}`}>
+          {userDetail.map((course, index) => (
+            <ListItem key={`${course.id}${index}`}>
               <ListItemAvatar>
                 <Avatar>
                   <FolderIcon />
                 </Avatar>
               </ListItemAvatar>
               <Link
-                to={`/courses/${course.maKhoaHoc}`}
+                to={`/courses/${course.id}`}
                 className={cardStyles.link}
               >
-                <ListItemText primary={course.tenKhoaHoc} />
+                <ListItemText primary={course.courseName} />
               </Link>
-              <ListItemSecondaryAction>
-                <IconButton
-                  edge="end"
-                  onClick={() => onEnroll(course.maKhoaHoc, isMe)}
-                >
-                  <Tooltip title="Leave This Course" placement="right">
-                    <BlockIcon />
-                  </Tooltip>
-                </IconButton>
-              </ListItemSecondaryAction>
             </ListItem>
           ))}
         </List>
@@ -167,10 +157,10 @@ const Courses = (props) => {
           </Typography>
         </Box>
 
-        {isMe && userDetail && userDetail.chiTietKhoaHocGhiDanh ? (
+        {isMe && userDetail && userDetail ? (
           <Box display="flex" justifyContent="center" mt={3}>
             <DataLength
-              items={userDetail.chiTietKhoaHocGhiDanh.length}
+              items={userDetail.length}
               type={"courses"}
             />
           </Box>

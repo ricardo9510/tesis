@@ -5,13 +5,10 @@ import * as actions from "../../store/actions";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import { List, ListItem, Tooltip } from "@material-ui/core";
-import { Fab, Box, TextField, Grid } from "@material-ui/core";
-
-import AddIcon from "@material-ui/icons/Add";
+import { List, ListItem } from "@material-ui/core";
+import { Box, TextField, Grid } from "@material-ui/core";
 
 import Spinner from "../UI/Spinner/Spinner";
-import CourseCardItem from "./CourseCardItem";
 import ChooseGroup from "./InputCustom/ChooseGroup";
 import DataLength from "../DataDisplay/DataLength";
 import UserCardItem from "./UserCardItem";
@@ -41,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
 function CourseListNew(props) {
   const classes = useStyles();
 
-  const { courseList, courseType, group, loading } = props;
+  const { courseList, courseType, group} = props;
   const { onFetchCourseList, onFetchCourseIndex } = props;
 
   useEffect(() => {

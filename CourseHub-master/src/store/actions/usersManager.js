@@ -1,7 +1,8 @@
 import axios from "../../axios";
 import * as actionTypes from "./actionTypes";
 import db from "../../firebase/firebaseConfig";
-import { collection, doc, onSnapshot, deleteDoc } from "firebase/firestore";
+import { arrayUnion, collection, doc, onSnapshot, deleteDoc, getDocs, query, updateDoc } from "firebase/firestore";
+import { get } from "lodash";
 
 export const fetchInfoClick = (selectedUser, tabIndex, avatarIndex) => {
   return {
@@ -56,12 +57,12 @@ export const listarUsuarios = () => {
     collection(db, 'usuarios'),
     (snapshot) => {
       const arregloUsuarios = snapshot.docs.map((documento) => {
-        return {...documento.data(), id: documento.id}
+        return { ...documento.data(), id: documento.id }
       })
 
-     result = arregloUsuarios;
-     console.log(result);
-     return result
+      result = arregloUsuarios;
+      console.log(result);
+      return result
     }
   );
 }
@@ -85,19 +86,19 @@ export const fetchUsers = (group) => {
       .catch((error) => {
         dispatch(fetchUsersFail(error));
       });*/
-      onSnapshot(
-        collection(db, 'usuarios')
-        ,
-        (snapshot) => {
-          const arregloUsuarios = snapshot.docs.map((documento) => {
-            return {...documento.data(), id: documento.id}
-          })
-    
-          if(arregloUsuarios.length === 0)
-            dispatch(fetchUsersFail(new Error("No se encontró los usuarios")))
-          dispatch(fetchUsersSuccess(arregloUsuarios));
-        }
-      );
+    onSnapshot(
+      collection(db, 'usuarios')
+      ,
+      (snapshot) => {
+        const arregloUsuarios = snapshot.docs.map((documento) => {
+          return { ...documento.data(), id: documento.id }
+        })
+
+        if (arregloUsuarios.length === 0)
+          dispatch(fetchUsersFail(new Error("No se encontró los usuarios")))
+        dispatch(fetchUsersSuccess(arregloUsuarios));
+      }
+    );
   };
 };
 
@@ -125,20 +126,17 @@ export const fetchCourseApprovalPendingFail = (error) => {
 export const fetchCourseApprovalPending = (selectedUser) => {
   return (dispatch) => {
     dispatch(fetchCourseApprovalPendingStart());
-    const user = JSON.parse(localStorage.getItem("user"));
-    const url = "/QuanLyNguoiDung/LayDanhSachKhoaHocChoXetDuyet";
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${user.accessToken}`,
-    };
-    const data = {
-      taiKhoan: selectedUser.taiKhoan,
-    };
-    axios({ method: "post", url, headers, data })
+    let queryFirebase = query(collection(db, "cursos"));
+    getDocs(queryFirebase)
       .then((response) => {
-        dispatch(
-          fetchCourseApprovalPendingSuccess(response.data, selectedUser)
+        let result = [];
+        response.forEach((doc) => {
+          result.push({ ...doc.data(), id: doc.id })
+        });
+        let resultFinal = result.filter(courseFilter =>
+          get(courseFilter, "usersSuccess", []).includes(selectedUser.id)
         );
+        dispatch(fetchCourseApprovalPendingSuccess(resultFinal, selectedUser));
       })
       .catch((error) => {
         dispatch(fetchCourseApprovalPendingFail(error.response.data));
@@ -288,24 +286,12 @@ export const approveCoursePendingFail = (error) => {
 export const approveCoursePending = (courseId, selectedUser) => {
   return (dispatch) => {
     dispatch(approveCoursePendingStart());
-    const user = JSON.parse(localStorage.getItem("user"));
-    const url = "/QuanLyKhoaHoc/GhiDanhKhoaHoc";
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${user.accessToken}`,
-    };
-    const data = {
-      maKhoaHoc: courseId,
-      taiKhoan: selectedUser.taiKhoan,
-    };
-    axios({ method: "post", url, headers, data })
-      .then((response) => {
-        // console.log(response.data);
-        dispatch(approveCoursePendingSuccess(response.data));
-        dispatch(fetchCourseApprovalPending(selectedUser));
-        dispatch(fetchCourseApproved(selectedUser));
-        dispatch(fetchCourseNoneEnroll(selectedUser));
-      })
+    updateDoc(doc(db, 'cursos', courseId), { usersSuccess: arrayUnion(selectedUser.id) }).then((responseUpdate) => {
+      dispatch(approveCoursePendingSuccess("Success"));
+      dispatch(fetchCourseApprovalPending(selectedUser));
+      dispatch(fetchCourseApproved(selectedUser));
+      dispatch(fetchCourseNoneEnroll(selectedUser));
+    })
       .catch((error) => {
         console.log(error.response.data);
         dispatch(approveCoursePendingFail(error.response.data));
@@ -337,18 +323,17 @@ export const fetchCourseApprovedFail = (error) => {
 export const fetchCourseApproved = (selectedUser) => {
   return (dispatch) => {
     dispatch(fetchCourseApprovedStart());
-    const user = JSON.parse(localStorage.getItem("user"));
-    const url = "/QuanLyNguoiDung/LayDanhSachKhoaHocDaXetDuyet";
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${user.accessToken}`,
-    };
-    const data = {
-      taiKhoan: selectedUser.taiKhoan,
-    };
-    axios({ method: "post", url, headers, data })
+    let queryFirebase = query(collection(db, "cursos"));
+    getDocs(queryFirebase)
       .then((response) => {
-        dispatch(fetchCourseApprovedSuccess(response.data, selectedUser));
+        let result = [];
+        response.forEach((doc) => {
+          result.push({ ...doc.data(), id: doc.id })
+        });
+        let resultFinal = result.filter(courseFilter =>
+          get(courseFilter, "usersSuccess", []).includes(selectedUser.id)
+        );
+        dispatch(fetchCourseApprovedSuccess(resultFinal, selectedUser));
       })
       .catch((error) => {
         dispatch(fetchCourseApprovedFail(error.response.data));
@@ -425,15 +410,17 @@ export const fetchCourseNoneEnrollFail = (error) => {
 export const fetchCourseNoneEnroll = (selectedUser) => {
   return (dispatch) => {
     dispatch(fetchCourseNoneEnrollStart());
-    const user = JSON.parse(localStorage.getItem("user"));
-    const url = `/QuanLyNguoiDung/LayDanhSachKhoaHocChuaGhiDanh?TaiKhoan=${selectedUser.taiKhoan}`;
-    const headers = {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${user.accessToken}`,
-    };
-    axios({ method: "post", url, headers })
+    let queryFirebase = query(collection(db, "cursos"));
+    getDocs(queryFirebase)
       .then((response) => {
-        dispatch(fetchCourseNoneEnrollSuccess(response.data, selectedUser));
+        let result = [];
+        response.forEach((doc) => {
+          result.push({ ...doc.data(), id: doc.id })
+        });
+        let resultFinal = result.filter(courseFilter =>
+          !get(courseFilter, "usersSuccess", []).includes(selectedUser.id)
+        );
+        dispatch(fetchCourseNoneEnrollSuccess(resultFinal, selectedUser));
       })
       .catch((error) => {
         dispatch(fetchCourseNoneEnrollFail(error.response.data));
