@@ -53,7 +53,7 @@ export const auth = (values, history, isSignUp) => {
         response.forEach((doc) => {
           result.push({...doc.data(), id:doc.id})
         });
-        dispatch(authSuccess(result[0], "¡Inicio de sesión con éxito!"));
+        dispatch(authSuccess(result[0], "¡ingreso realizado con éxito!"));
         localStorage.setItem("user", JSON.stringify(result[0]));
         history.push("/");
       })

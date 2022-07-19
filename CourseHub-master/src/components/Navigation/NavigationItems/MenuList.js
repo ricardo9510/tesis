@@ -114,7 +114,7 @@ const MenuList = (props) => {
             classes={{ collapsed: classes.collapsed, root: classes.root }}
             color={"#8e44ad"}
             startIcon={<Layers className={classes.navIcon} />}
-            label={"Gestion Cursos"}
+            label={"Gestión Cursos"}
             amount={""}
             {...commonProps("/courses-management")}
             dotOnCollapsed={true}
@@ -133,7 +133,7 @@ const MenuList = (props) => {
             classes={{ collapsed: classes.collapsed, root: classes.root }}
             color={"#44AD95"}
             startIcon={<Payment className={classes.navIcon} />}
-            label={"Gestion Pagos"}
+            label={"Gestión Pagos"}
             amount={""}
             {...commonProps("/payments-management")}
             dotOnCollapsed={true}
@@ -152,7 +152,7 @@ const MenuList = (props) => {
             classes={{ collapsed: classes.collapsed, root: classes.root }}
             color={"#44AD95"}
             startIcon={<Assessment className={classes.navIcon} />}
-            label={"Gestion Notas"}
+            label={"Gestión Calificaciones"}
             amount={""}
             {...commonProps("/scores-management")}
             dotOnCollapsed={true}
@@ -171,7 +171,7 @@ const MenuList = (props) => {
             classes={{ collapsed: classes.collapsed, root: classes.root }}
             color={"#e37400"}
             startIcon={<People className={classes.navIcon} />}
-            label={"Gestion Usuarios"}
+            label={"Gestión Usuarios"}
             amount={""}
             {...commonProps("/users-management")}
             dotOnCollapsed={true}
@@ -231,19 +231,19 @@ const MenuList = (props) => {
 
         {user && user.tipoCuenta === "GV" ? (
           <Fragment>
-            <Tooltip title="Gestion Cursos">
+            <Tooltip title="Gestión Cursos">
               <CoursesManage />
             </Tooltip>
 
-            <Tooltip title="Gestion Usuarios">
+            <Tooltip title="Gestión Usuarios">
               <StudentsManage />
             </Tooltip>
 
-            <Tooltip title="Gestion Pagos">
+            <Tooltip title="Gestión Pagos">
               <PaymentsManage />
             </Tooltip>
 
-            <Tooltip title="Gestion Notas">
+            <Tooltip title="Gestión Calificaciones">
               <ScoresManage />
             </Tooltip>
 

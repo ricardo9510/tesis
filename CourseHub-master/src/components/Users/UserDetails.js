@@ -167,7 +167,7 @@ const UserDetails = (props) => {
                     onDisapproveCourse(course.id, selectedUser)
                   }
                 >
-                  <Tooltip title="Ban" placement="right">
+                  <Tooltip title="Eliminar" placement="right">
                     <BlockIcon />
                   </Tooltip>
                 </IconButton>
@@ -200,7 +200,7 @@ const UserDetails = (props) => {
                     onDisapproveCourse(course.id, selectedUser)
                   }
                 >
-                  <Tooltip title="Ban" placement="right">
+                  <Tooltip title="Eliminar" placement="right">
                     <BlockIcon />
                   </Tooltip>
                 </IconButton>

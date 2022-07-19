@@ -164,9 +164,9 @@ export const addCourse = (
     if (isEdit) {
       updateDoc(doc(db, 'cursos', values.id), data)
           .then((response) => {
-            let message = `Creación del nuevo curso ${data.courseName} con exito`;
+            let message = `Curso agregado correctamente ${data.courseName}`;
             if (isEdit) {
-              message = `Actualización del curso ${data.courseName} con exito`;
+              message = `Curso actualizado correctamente ${data.courseName}`;
             }
 
             if (selectedImage) {
@@ -194,9 +194,9 @@ export const addCourse = (
     }else{
       addDoc(collection(db, 'cursos'), {...data, usersSuccess: [], usersPending: [], usersRefuse: []})
           .then((response) => {
-            let message = `Creación del nuevo curso ${data.courseName} con exito`;
+            let message = `Curso agregado correctamente ${data.courseName}`;
             if (isEdit) {
-              message = `Actualización del curso ${data.courseName} con exito`;
+              message = `Curso actualizado correctamente ${data.courseName}`;
             }
 
             if (selectedImage) {

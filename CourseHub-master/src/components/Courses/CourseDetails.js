@@ -160,7 +160,7 @@ const CourseDetails = (props) => {
                   aria-label="disApprovel"
                   onClick={() => onDisapproveUser(selectedCourse, user)}
                 >
-                  <Tooltip title="Ban" placement="right">
+                  <Tooltip title="Eliminar" placement="right">
                     <BlockIcon />
                   </Tooltip>
                 </IconButton>
@@ -192,7 +192,7 @@ const CourseDetails = (props) => {
                   aria-label="disApprovel"
                   onClick={() => onDisapproveUser(selectedCourse, user)}
                 >
-                  <Tooltip title="Ban" placement="right">
+                  <Tooltip title="Eliminar" placement="right">
                     <BlockIcon />
                   </Tooltip>
                 </IconButton>
